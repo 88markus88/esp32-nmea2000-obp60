@@ -85,7 +85,7 @@ bool homevalid = false; // homelat and homelon are valid
         return key;
     }
 
-    virtual void displayPage(PageData &pageData)
+    int displayPage(PageData &pageData)
     {
         GwConfigHandler *config = commonData->config;
         GwLog *logger = commonData->logger;
@@ -120,7 +120,7 @@ bool homevalid = false; // homelat and homelon are valid
         }
         else{
             value1 = simtime++;                         // Simulation data for time value 11:36 in seconds
-        }                                               // Other simulation data see OBP60Formater.cpp
+        }                                               // Other simulation data see OBP60Formatter.cpp
         bool valid1 = bvalue1->valid;                   // Valid information 
         String svalue1 = formatValue(bvalue1, *commonData).svalue;    // Formatted value as string including unit conversion and switching decimal places
         String unit1 = formatValue(bvalue1, *commonData).unit;        // Unit of value
@@ -162,7 +162,7 @@ bool homevalid = false; // homelat and homelon are valid
         }
 
         // Logging boat values
-        if (bvalue1 == NULL) return;
+        if (bvalue1 == NULL) return PAGE_OK; // WTF why this statement?
         LOG_DEBUG(GwLog::LOG,"Drawing at PageClock, %s:%f,  %s:%f", name1.c_str(), value1, name2.c_str(), value2);
 
         // Draw page
@@ -177,7 +177,7 @@ bool homevalid = false; // homelat and homelon are valid
         struct tm *local_tm = localtime(&tv);
 
         // Show values GPS date
-        getdisplay().setFont(&Ubuntu_Bold8pt7b);
+        getdisplay().setFont(&Ubuntu_Bold8pt8b);
         getdisplay().setCursor(10, 65);
         if (holdvalues == false) {
             if (source == 'G') {
@@ -197,7 +197,7 @@ bool homevalid = false; // homelat and homelon are valid
         } else {
             getdisplay().print(svalue2old);
         }
-        getdisplay().setFont(&Ubuntu_Bold12pt7b);
+        getdisplay().setFont(&Ubuntu_Bold12pt8b);
         getdisplay().setCursor(10, 95);
         getdisplay().print("Date");                          // Name
 
@@ -205,7 +205,7 @@ bool homevalid = false; // homelat and homelon are valid
         getdisplay().fillRect(0, 149, 60, 3, commonData->fgcolor);
 
         // Show values GPS time
-        getdisplay().setFont(&Ubuntu_Bold8pt7b);
+        getdisplay().setFont(&Ubuntu_Bold8pt8b);
         getdisplay().setCursor(10, 250);
         if (holdvalues == false) {
             if (source == 'G') {
@@ -225,7 +225,7 @@ bool homevalid = false; // homelat and homelon are valid
         else {
              getdisplay().print(svalue1old);
         }
-        getdisplay().setFont(&Ubuntu_Bold12pt7b);
+        getdisplay().setFont(&Ubuntu_Bold12pt8b);
         getdisplay().setCursor(10, 220);
         getdisplay().print("Time");                          // Name
 
@@ -238,11 +238,11 @@ bool homevalid = false; // homelat and homelon are valid
             sunrise = String("06:42");
         }
 
-        getdisplay().setFont(&Ubuntu_Bold8pt7b);
+        getdisplay().setFont(&Ubuntu_Bold8pt8b);
         getdisplay().setCursor(335, 65);
         if(holdvalues == false) getdisplay().print(sunrise); // Value
         else getdisplay().print(svalue5old);
-        getdisplay().setFont(&Ubuntu_Bold12pt7b);
+        getdisplay().setFont(&Ubuntu_Bold12pt8b);
         getdisplay().setCursor(335, 95);
         getdisplay().print("SunR");                          // Name
 
@@ -258,11 +258,11 @@ bool homevalid = false; // homelat and homelon are valid
             sunset = String("21:03");
         }
 
-        getdisplay().setFont(&Ubuntu_Bold8pt7b);
+        getdisplay().setFont(&Ubuntu_Bold8pt8b);
         getdisplay().setCursor(335, 250);
         if(holdvalues == false) getdisplay().print(sunset);  // Value
         else getdisplay().print(svalue6old);
-        getdisplay().setFont(&Ubuntu_Bold12pt7b);
+        getdisplay().setFont(&Ubuntu_Bold12pt8b);
         getdisplay().setCursor(335, 220);
         getdisplay().print("SunS");                          // Name
 
@@ -304,7 +304,7 @@ bool homevalid = false; // homelat and homelon are valid
             getdisplay().getTextBounds(ii, int(x), int(y), &x1, &y1, &w, &h); // Calc width of new string
             getdisplay().setCursor(x-w/2, y+h/2);
             if(i % 30 == 0){
-                getdisplay().setFont(&Ubuntu_Bold12pt7b);
+                getdisplay().setFont(&Ubuntu_Bold12pt8b);
                 getdisplay().print(ii);
             }
 
@@ -336,7 +336,7 @@ bool homevalid = false; // homelat and homelon are valid
         }
 
         // Print Unit in clock
-        getdisplay().setFont(&Ubuntu_Bold12pt7b);
+        getdisplay().setFont(&Ubuntu_Bold12pt8b);
         getdisplay().setCursor(175, 110);
         if(holdvalues == false){
             getdisplay().print(tz == 'L' ? "LOT" : "UTC");
@@ -345,7 +345,7 @@ bool homevalid = false; // homelat and homelon are valid
             getdisplay().print(unit2old); // date unit
         }
 
-        getdisplay().setFont(&Ubuntu_Bold8pt7b);
+        getdisplay().setFont(&Ubuntu_Bold8pt8b);
         getdisplay().setCursor(185, 190);
         if (source == 'G') {
             getdisplay().print("GPS");
@@ -438,9 +438,7 @@ bool homevalid = false; // homelat and homelon are valid
         getdisplay().fillCircle(200, 150, startwidth + 6, commonData->bgcolor);
         getdisplay().fillCircle(200, 150, startwidth + 4, commonData->fgcolor);
 
-        // Update display
-        getdisplay().nextPage();    // Partial update (fast)
-
+        return PAGE_UPDATE;
     };
 };
 

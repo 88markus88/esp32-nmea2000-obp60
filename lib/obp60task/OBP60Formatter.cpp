@@ -37,9 +37,21 @@ String formatTime(char fmttype, uint8_t hour, uint8_t minute, uint8_t second) {
     return String(buffer);
 }
 
-FormatedData formatValue(GwApi::BoatValue *value, CommonData &commondata){
+String formatLatitude(double lat) {
+    float degree = abs(int(lat));
+    float minute = abs((lat - int(lat)) * 60);
+    return String(degree, 0) + "\x90 " + String(minute, 4) + "' " + ((lat > 0) ? "N" : "S");
+}
+
+String formatLongitude(double lon) {
+    float degree = abs(int(lon));
+    float minute = abs((lon - int(lon)) * 60);
+    return String(degree, 0) + "\x90 " + String(minute, 4) + "' " + ((lon > 0) ? "E" : "W");
+}
+
+FormattedData formatValue(GwApi::BoatValue *value, CommonData &commondata){
     GwLog *logger = commondata.logger;
-    FormatedData result;
+    FormattedData result;
     static int dayoffset = 0;
     double rawvalue = 0;
 
@@ -346,7 +358,7 @@ FormatedData formatValue(GwApi::BoatValue *value, CommonData &commondata){
             else{
                 latdir = "S";
             }
-            latitude = String(degree,0) + "\" " + String(minute,4) + "' " + latdir;
+            latitude = String(degree,0) + "\x90 " + String(minute,4) + "' " + latdir;
             result.unit = "";
             strcpy(buffer, latitude.c_str());
         }
@@ -370,7 +382,7 @@ FormatedData formatValue(GwApi::BoatValue *value, CommonData &commondata){
             else{
                 londir = "W";
             }
-            longitude = String(degree,0) + "\" " + String(minute,4) + "' " + londir;
+            longitude = String(degree,0) + "\x90 " + String(minute,4) + "' " + londir;
             result.unit = "";
             strcpy(buffer, longitude.c_str());
         }
@@ -442,7 +454,7 @@ FormatedData formatValue(GwApi::BoatValue *value, CommonData &commondata){
             result.unit = "C";
         }
         else if(String(tempFormat) == "F"){
-            temp = temp - 459.67;
+            temp = (temp - 273.15) * 9 / 5 + 32;
             result.unit = "F";
         }
         else{

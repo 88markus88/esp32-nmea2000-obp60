@@ -2,6 +2,7 @@
 
 #include "Pagedata.h"
 #include "OBP60Extensions.h"
+#include "BoatDataCalibration.h"
 
 class PageOneValue : public Page
 {
@@ -20,7 +21,7 @@ class PageOneValue : public Page
         return key;
     }
 
-    virtual void displayPage(PageData &pageData){
+    int displayPage(PageData &pageData){
         GwConfigHandler *config = commonData->config;
         GwLog *logger = commonData->logger;
 
@@ -39,8 +40,9 @@ class PageOneValue : public Page
         GwApi::BoatValue *bvalue1 = pageData.values[0]; // First element in list (only one value by PageOneValue)
         String name1 = xdrDelete(bvalue1->getName());   // Value name
         name1 = name1.substring(0, 6);                  // String length limit for value name
+        calibrationData.calibrateInstance(bvalue1, logger); // Check if boat data value is to be calibrated
         double value1 = bvalue1->value;                 // Value as double in SI unit
-        bool valid1 = bvalue1->valid;                   // Valid information 
+        bool valid1 = bvalue1->valid;                   // Valid information
         String svalue1 = formatValue(bvalue1, *commonData).svalue;    // Formatted value as string including unit conversion and switching decimal places
         String unit1 = formatValue(bvalue1, *commonData).unit;        // Unit of value
 
@@ -51,7 +53,7 @@ class PageOneValue : public Page
         }
 
         // Logging boat values
-        if (bvalue1 == NULL) return;
+        if (bvalue1 == NULL) return PAGE_OK; // WTF why this statement?
         LOG_DEBUG(GwLog::LOG,"Drawing at PageOneValue, %s: %f", name1.c_str(), value1);
 
         // Draw page
@@ -62,12 +64,12 @@ class PageOneValue : public Page
 
         // Show name
         getdisplay().setTextColor(commonData->fgcolor);
-        getdisplay().setFont(&Ubuntu_Bold32pt7b);
+        getdisplay().setFont(&Ubuntu_Bold32pt8b);
         getdisplay().setCursor(20, 100);
         getdisplay().print(name1);                           // Page name
 
         // Show unit
-        getdisplay().setFont(&Ubuntu_Bold20pt7b);
+        getdisplay().setFont(&Ubuntu_Bold20pt8b);
         getdisplay().setCursor(270, 100);
         if(holdvalues == false){
             getdisplay().print(unit1);                       // Unit
@@ -78,11 +80,11 @@ class PageOneValue : public Page
 
         // Switch font if format for any values
         if(bvalue1->getFormat() == "formatLatitude" || bvalue1->getFormat() == "formatLongitude"){
-            getdisplay().setFont(&Ubuntu_Bold20pt7b);
+            getdisplay().setFont(&Ubuntu_Bold20pt8b);
             getdisplay().setCursor(20, 180);
         }
         else if(bvalue1->getFormat() == "formatTime" || bvalue1->getFormat() == "formatDate"){
-            getdisplay().setFont(&Ubuntu_Bold32pt7b);
+            getdisplay().setFont(&Ubuntu_Bold32pt8b);
             getdisplay().setCursor(20, 200);
         }
         else{
@@ -102,9 +104,7 @@ class PageOneValue : public Page
             unit1old = unit1;                                           // Save the old unit
         }
 
-        // Update display
-        getdisplay().nextPage();    // Partial update (fast)
-
+        return PAGE_UPDATE;
     };
 };
 

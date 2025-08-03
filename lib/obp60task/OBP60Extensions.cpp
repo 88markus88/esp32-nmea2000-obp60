@@ -11,18 +11,19 @@
 #include "imglib.h"
 
 // Character sets
-#include "Ubuntu_Bold8pt7b.h"
-#include "Ubuntu_Bold10pt7b.h"
-#include "Ubuntu_Bold12pt7b.h"
-#include "Ubuntu_Bold16pt7b.h"
-#include "Ubuntu_Bold20pt7b.h"
-#include "Ubuntu_Bold32pt7b.h"
-#include "DSEG7Classic-BoldItalic16pt7b.h"
-#include "DSEG7Classic-BoldItalic20pt7b.h"
-#include "DSEG7Classic-BoldItalic30pt7b.h"
-#include "DSEG7Classic-BoldItalic42pt7b.h"
-#include "DSEG7Classic-BoldItalic60pt7b.h"
-#include "Atari16px8b.h" // Key label font
+#include "fonts/DSEG7Classic-BoldItalic16pt7b.h"
+#include "fonts/DSEG7Classic-BoldItalic20pt7b.h"
+#include "fonts/DSEG7Classic-BoldItalic26pt7b.h"
+#include "fonts/DSEG7Classic-BoldItalic30pt7b.h"
+#include "fonts/DSEG7Classic-BoldItalic42pt7b.h"
+#include "fonts/DSEG7Classic-BoldItalic60pt7b.h"
+#include "fonts/Ubuntu_Bold8pt8b.h"
+#include "fonts/Ubuntu_Bold10pt8b.h"
+#include "fonts/Ubuntu_Bold12pt8b.h"
+#include "fonts/Ubuntu_Bold16pt8b.h"
+#include "fonts/Ubuntu_Bold20pt8b.h"
+#include "fonts/Ubuntu_Bold32pt8b.h"
+#include "fonts/Atari16px8b.h" // Key label font
 
 // E-Ink Display
 #define GxEPD_WIDTH 400     // Display width
@@ -136,10 +137,10 @@ void deepSleep(CommonData &common){
     getdisplay().setFullWindow();               // Set full Refresh
     getdisplay().fillScreen(common.bgcolor);    // Clear screen
     getdisplay().setTextColor(common.fgcolor);
-    getdisplay().setFont(&Ubuntu_Bold20pt7b);
+    getdisplay().setFont(&Ubuntu_Bold20pt8b);
     getdisplay().setCursor(85, 150);
     getdisplay().print("Sleep Mode");
-    getdisplay().setFont(&Ubuntu_Bold8pt7b);
+    getdisplay().setFont(&Ubuntu_Bold8pt8b);
     getdisplay().setCursor(65, 175);
     getdisplay().print("To wake up press key and wait 5s");
     getdisplay().nextPage();                // Update display contents
@@ -161,10 +162,10 @@ void deepSleep(CommonData &common){
     //getdisplay().setPartialWindow(0, 0, getdisplay().width(), getdisplay().height()); // Set partial update
     getdisplay().fillScreen(common.bgcolor);    // Clear screen
     getdisplay().setTextColor(common.fgcolor);
-    getdisplay().setFont(&Ubuntu_Bold20pt7b);
+    getdisplay().setFont(&Ubuntu_Bold20pt8b);
     getdisplay().setCursor(85, 150);
     getdisplay().print("Sleep Mode");
-    getdisplay().setFont(&Ubuntu_Bold8pt7b);
+    getdisplay().setFont(&Ubuntu_Bold8pt8b);
     getdisplay().setCursor(65, 175);
     getdisplay().print("To wake up press wheel and wait 5s");
     getdisplay().nextPage();                // Partial update
@@ -299,6 +300,49 @@ void fillPoly4(const std::vector<Point>& p4, uint16_t color) {
     getdisplay().fillTriangle(p4[0].x, p4[0].y, p4[2].x, p4[2].y, p4[3].x, p4[3].y, color);
 }
 
+// Split string into words, whitespace separated
+std::vector<String> split(const String &s) {
+    std::vector<String> words;
+    String word = "";
+    for (size_t i = 0; i < s.length(); i++) {
+        if (s[i] == ' ' || s[i] == '\t' || s[i] == '\r' || s[i] == '\n')  {
+            if (word.length() > 0) {
+                words.push_back(word);
+                word = "";
+            }
+        } else {
+             word += s[i];
+        }
+    }
+    if (word.length() > 0) {
+        words.push_back(word);
+    }
+    return words;
+}
+
+// Wordwrap single line, monospaced font
+std::vector<String> wordwrap(String &line, uint16_t maxwidth) {
+    std::vector<String> lines;
+    std::vector<String> words = split(line);
+    String currentLine = "";
+    for (const auto& word : words) {
+        if (currentLine.length() + word.length() + 1 > maxwidth) {
+             if (currentLine.length() > 0) {
+                  lines.push_back(currentLine);
+                  currentLine = "";
+             }
+        }
+        if (currentLine.length() > 0) {
+            currentLine += " ";
+        }
+        currentLine += word;
+    }
+    if (currentLine.length() > 0) {
+        lines.push_back(currentLine);
+    }
+    return lines;
+}
+
 // Draw centered text
 void drawTextCenter(int16_t cx, int16_t cy, String text) {
     int16_t x1, y1;
@@ -346,7 +390,7 @@ void displayHeader(CommonData &commonData, GwApi::BoatValue *date, GwApi::BoatVa
 
         // Show status info
         getdisplay().setTextColor(commonData.fgcolor);
-        getdisplay().setFont(&Ubuntu_Bold8pt7b);
+        getdisplay().setFont(&Ubuntu_Bold8pt8b);
         getdisplay().setCursor(0, 15);
         if(commonData.status.wifiApOn){
         getdisplay().print(" AP ");
@@ -416,7 +460,7 @@ void displayHeader(CommonData &commonData, GwApi::BoatValue *date, GwApi::BoatVa
             getdisplay().setTextColor(commonData.fgcolor);
             getdisplay().drawRect(201, 0, 23, 19, commonData.fgcolor);
         }
-        getdisplay().setFont(&Ubuntu_Bold8pt7b);
+        getdisplay().setFont(&Ubuntu_Bold8pt8b);
         drawTextCenter(211, 9, String(commonData.data.actpage));
         heartbeat = !heartbeat;
 
@@ -425,7 +469,7 @@ void displayHeader(CommonData &commonData, GwApi::BoatValue *date, GwApi::BoatVa
         String timesource = commonData.config->getString(commonData.config->timeSource);
         double tz = commonData.config->getString(commonData.config->timeZone).toDouble();
         getdisplay().setTextColor(commonData.fgcolor);
-        getdisplay().setFont(&Ubuntu_Bold8pt7b);
+        getdisplay().setFont(&Ubuntu_Bold8pt8b);
         getdisplay().setCursor(230, 15);
         if (timesource == "RTC" or timesource == "iRTC") {
             // TODO take DST into account
@@ -542,6 +586,47 @@ void displayFooter(CommonData &commonData) {
     getdisplay().drawLine(335, 280, 335, 399, commonData.fgcolor);
     drawTextCenter(366, 291, commonData.keydata[1].label);
 #endif
+}
+
+// Alarm overlay, to be drawn as very last draw operation
+void displayAlarm(CommonData &commonData) {
+
+    const uint16_t x = 50;   // overlay area
+    const uint16_t y = 100;
+    const uint16_t w = 300;
+    const uint16_t h = 150;
+
+    getdisplay().setFont(&Atari16px);
+    getdisplay().setTextColor(commonData.fgcolor);
+
+    // overlay
+    getdisplay().drawRect(x, y, w, h, commonData.fgcolor);
+    getdisplay().fillRect(x + 1, y + 1, w - 1, h - 1, commonData.bgcolor);
+    getdisplay().drawRect(x + 3, y + 3, w - 5, h - 5, commonData.fgcolor);
+
+    // exclamation icon in left top corner
+    getdisplay().drawXBitmap(x + 16, y + 16, exclamation_bits, exclamation_width, exclamation_height, commonData.fgcolor);
+
+    // title
+    getdisplay().setCursor(x + 64, y + 30);
+    getdisplay().print("A L A R M");
+    getdisplay().setCursor(x + 64, y + 48);
+    getdisplay().print("#" + commonData.alarm.id);
+    getdisplay().print(" from ");
+    getdisplay().print(commonData.alarm.source);
+
+    // message, but maximum 4 lines
+    std::vector<String> lines = wordwrap (commonData.alarm.message, w - 16 - 8 / 8);
+    int n = 0;
+    for (const auto& l : lines) {
+        getdisplay().setCursor(x + 16, y + 80 + n);
+        getdisplay().print(l);
+        n += 16;
+        if (n > 64) {
+            break;
+        }
+    }
+    drawTextCenter(x + w / 2,  y + h - 16, "Press button 1 to dismiss alarm");
 }
 
 // Sunset und sunrise calculation
@@ -679,7 +764,7 @@ void generatorGraphic(uint x, uint y, int pcolor, int bcolor){
         getdisplay().fillCircle(xb, yb, 41, bcolor);
         // Insert G
         getdisplay().setTextColor(pcolor);
-        getdisplay().setFont(&Ubuntu_Bold32pt7b);
+        getdisplay().setFont(&Ubuntu_Bold32pt8b);
         getdisplay().setCursor(xb-22, yb+20);
         getdisplay().print("G");
 }

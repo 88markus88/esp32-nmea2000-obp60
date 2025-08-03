@@ -21,7 +21,7 @@ public:
         return key;
     }
 
-    virtual void displayPage(PageData &pageData)
+    int displayPage(PageData &pageData)
     {
         GwConfigHandler *config = commonData->config;
         GwLog *logger = commonData->logger;
@@ -86,21 +86,20 @@ public:
             float x = 200 + (rInstrument-30)*sin(i/180.0*pi);  //  x-coordinate dots
             float y = 150 - (rInstrument-30)*cos(i/180.0*pi);  //  y-coordinate cots 
             const char *ii = " ";
-            switch (i)
-            {
-            case 0: ii=" "; break;      // Use a blank for a empty scale value
-            case 30 : ii=" "; break;
-            case 60 : ii=" "; break;
-            case 90 : ii="45"; break;
-            case 120 : ii="30"; break;
-            case 150 : ii="15"; break;
-            case 180 : ii="0"; break;
-            case 210 : ii="15"; break;
-            case 240 : ii="30"; break;
-            case 270 : ii="45"; break;
-            case 300 : ii=" "; break;
-            case 330 : ii=" "; break;
-            default: break;
+            switch (i) {
+                case 0: ii=" "; break;      // Use a blank for a empty scale value
+                case 30 : ii=" "; break;
+                case 60 : ii=" "; break;
+                case 90 : ii="45"; break;
+                case 120 : ii="30"; break;
+                case 150 : ii="15"; break;
+                case 180 : ii="0"; break;
+                case 210 : ii="15"; break;
+                case 240 : ii="30"; break;
+                case 270 : ii="45"; break;
+                case 300 : ii=" "; break;
+                case 330 : ii=" "; break;
+                default: break;
             }
 
             // Print text centered on position x, y
@@ -109,7 +108,7 @@ public:
             getdisplay().getTextBounds(ii, int(x), int(y), &x1, &y1, &w, &h); // Calc width of new string
             getdisplay().setCursor(x-w/2, y+h/2);
             if(i % 30 == 0){
-                getdisplay().setFont(&Ubuntu_Bold8pt7b);
+                getdisplay().setFont(&Ubuntu_Bold8pt8b);
                 getdisplay().print(ii);
             }
 
@@ -189,26 +188,24 @@ public:
         getdisplay().fillRect(150, 150, 100, 4, commonData->fgcolor);                 // Water line
 
         // Print label
-        getdisplay().setFont(&Ubuntu_Bold16pt7b);
+        getdisplay().setFont(&Ubuntu_Bold16pt8b);
         getdisplay().setCursor(100, 70);
         getdisplay().print("Keel Position");                 // Label
 
         if((rotsensor == "AS5600" && rotfunction == "Keel" && (valid1 == true || holdvalues == true)) || simulation == true){
             // Print Unit of keel position
-            getdisplay().setFont(&Ubuntu_Bold12pt7b);
+            getdisplay().setFont(&Ubuntu_Bold12pt8b);
             getdisplay().setCursor(175, 110);
             getdisplay().print(unit1);                       // Unit
         }
         else{
             // Print Unit of keel position
-            getdisplay().setFont(&Ubuntu_Bold8pt7b);
+            getdisplay().setFont(&Ubuntu_Bold8pt8b);
             getdisplay().setCursor(145, 110);
             getdisplay().print("No sensor data");            // Info missing sensor
         }
 
-        // Update display
-        getdisplay().nextPage();    // Partial update (fast)
-
+        return PAGE_UPDATE;
     };
 };
 

@@ -2,6 +2,7 @@
 
 #include "Pagedata.h"
 #include "OBP60Extensions.h"
+#include "BoatDataCalibration.h"
 
 class PageRudderPosition : public Page
 {
@@ -21,7 +22,7 @@ public:
         return key;
     }
 
-    virtual void displayPage(PageData &pageData){
+   int displayPage(PageData &pageData){
         GwConfigHandler *config = commonData->config;
         GwLog *logger = commonData->logger;
 
@@ -40,23 +41,24 @@ public:
         GwApi::BoatValue *bvalue1 = pageData.values[0]; // First element in list
         String name1 = bvalue1->getName().c_str();      // Value name
         name1 = name1.substring(0, 6);                  // String length limit for value name
+        calibrationData.calibrateInstance(bvalue1, logger); // Check if boat data value is to be calibrated
         value1 = bvalue1->value;                        // Raw value without unit convertion
         bool valid1 = bvalue1->valid;                   // Valid information 
         String svalue1 = formatValue(bvalue1, *commonData).svalue;    // Formatted value as string including unit conversion and switching decimal places
         String unit1 = formatValue(bvalue1, *commonData).unit;        // Unit of value
+
         if(valid1 == true){
             value1old = value1;   	                    // Save old value
             unit1old = unit1;                           // Save old unit
+        } else {
+            if(simulation == true){
+                value1 = (3 + float(random(0, 50)) / 10.0)/360*2*PI;
+                unit1 = "Deg";
+            }
+            else{
+                value1 = 0;
+            }
         }
-
-        if(simulation == true){
-            value1 = (3 + float(random(0, 50)) / 10.0)/360*2*PI;
-            unit1 = "Deg";
-        }
-        else{
-            value1 = 0;
-        }
-
 
         // Optical warning by limit violation (unused)
         if(String(flashLED) == "Limit Violation"){
@@ -65,7 +67,7 @@ public:
         }
 
         // Logging boat values
-        if (bvalue1 == NULL) return;
+        if (bvalue1 == NULL) return PAGE_OK; // WTF why this statement?
         LOG_DEBUG(GwLog::LOG,"Drawing at PageRudderPosition, %s:%f", name1.c_str(), value1);
 
         // Draw page
@@ -113,7 +115,7 @@ public:
             getdisplay().getTextBounds(ii, int(x), int(y), &x1, &y1, &w, &h); // Calc width of new string
             getdisplay().setCursor(x-w/2, y+h/2);
             if(i % 30 == 0){
-                getdisplay().setFont(&Ubuntu_Bold8pt7b);
+                getdisplay().setFont(&Ubuntu_Bold8pt8b);
                 getdisplay().print(ii);
             }
 
@@ -142,26 +144,26 @@ public:
         }
 
         // Print label
-        getdisplay().setFont(&Ubuntu_Bold16pt7b);
+        getdisplay().setFont(&Ubuntu_Bold16pt8b);
         getdisplay().setCursor(80, 70);
         getdisplay().print("Rudder Position");               // Label
 
         // Print Unit in RudderPosition
         if(valid1 == true || simulation == true){
             if(holdvalues == false){
-                getdisplay().setFont(&Ubuntu_Bold12pt7b);
+                getdisplay().setFont(&Ubuntu_Bold12pt8b);
                 getdisplay().setCursor(175, 110);
                 getdisplay().print(unit1);                   // Unit
             }
             else{
-                getdisplay().setFont(&Ubuntu_Bold12pt7b);
+                getdisplay().setFont(&Ubuntu_Bold12pt8b);
                 getdisplay().setCursor(175, 110);
                 getdisplay().print(unit1old);                // Unit
             }
         }
         else{
             // Print Unit of keel position
-            getdisplay().setFont(&Ubuntu_Bold8pt7b);
+            getdisplay().setFont(&Ubuntu_Bold8pt8b);
             getdisplay().setCursor(145, 110);
             getdisplay().print("No sensor data");            // Info missing sensor
             }
@@ -205,8 +207,7 @@ public:
         getdisplay().fillCircle(200, 150, startwidth + 6, commonData->bgcolor);
         getdisplay().fillCircle(200, 150, startwidth + 4, commonData->fgcolor);
 
-        // Update display
-        getdisplay().nextPage();    // Partial update (fast)
+        return PAGE_UPDATE;
     };
 };
 

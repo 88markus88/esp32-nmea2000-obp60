@@ -65,7 +65,7 @@ class PageXTETrack : public Page
         return key;
     }
 
-    virtual void displayPage(PageData &pageData){
+    int displayPage(PageData &pageData){
         GwConfigHandler *config = commonData->config;
         GwLog *logger = commonData->logger;
 
@@ -94,7 +94,7 @@ class PageXTETrack : public Page
         getdisplay().setTextColor(commonData->fgcolor);
 
         // descriptions
-        getdisplay().setFont(&Ubuntu_Bold8pt7b);
+        getdisplay().setFont(&Ubuntu_Bold8pt8b);
         getdisplay().setCursor(50, 188);
         getdisplay().print("Cross-track error");
         getdisplay().setCursor(270, 188);
@@ -148,7 +148,7 @@ class PageXTETrack : public Page
             sval_wpname = "Tonne 122";
         }
 
-        getdisplay().setFont(&Ubuntu_Bold10pt7b);
+        getdisplay().setFont(&Ubuntu_Bold10pt8b);
         getdisplay().getTextBounds(sval_wpname, 0, 150, &x, &y, &w, &h);
         // TODO if text don't fix use smaller font size.
         // if smallest size does not fit use 2 lines
@@ -207,9 +207,7 @@ class PageXTETrack : public Page
         drawSegment(399, 100, 318, 24, 289, 24, 350, 100, commonData->fgcolor, seg[4]);
         drawSegment(399, 54, 354, 24, 325, 24, 399, 90, commonData->fgcolor, seg[5]);
 
-        // Update display
-        getdisplay().nextPage();    // Partial update (fast)
-
+        return PAGE_UPDATE;
     };
 };
 
@@ -225,11 +223,11 @@ static Page* createPage(CommonData &common){
  * this will be number of BoatValue pointers in pageData.values
  */
 PageDescription registerPageXTETrack(
-    "XTETrack",            // Page name
-    createPage,             // Action
-    0,                      // Number of bus values depends on selection in Web configuration
+    "XTETrack", // Page name
+    createPage, // Action
+    0,          // Number of bus values depends on selection in Web configuration
     {"XTE", "COG", "DTW", "BTW"}, // Bus values we need in the page
-    true                    // Show display header on/off
+    true        // Show display header on/off
 );
 
 #endif
