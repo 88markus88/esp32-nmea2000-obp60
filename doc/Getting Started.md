@@ -26,7 +26,25 @@ Nach dem Einschalten der Stromversorgung piept das Gerät und zeigt diesen Start
 Kurz darauf wird ein QR-Code gezeigt, mit dem man sich per Handy direkt mit dem OBP60 verbinden kann. 
 ![QR Code](https://obp60-v2-docu.readthedocs.io/de/latest/_images/OBP60_QR_Code_tr.png)
 
-Das Gerät spannt ein eigenes WLAN auf. In der Netzwerkliste z.B. auf Android ist ganz unten ein QR-Symbol, darauf klicken und man kann den QR Code scannen, das Handy loggt sich dann direkt in das WLAN des OBP60 ein. 
+Das Gerät spannt ein eigenes WLAN auf. In der Netzwerkliste z.B. auf Android ist ganz unten ein QR-Symbol, darauf klicken und man kann den QR Code scannen, das Handy / Tablet loggt sich dann direkt in das WLAN des OBP60 ein. 
+
+Falls das nicht klappen sollte, bitte das Wifi-Netzwerk mit der ID "OBP60V2" auswählen und das Standard-Passwort "esp32nmea2k" eingeben.
+
+Sobald die Verbindung hergestellt ist, wird die Adresse des OBP60 eingegeben. Die lautet "OBP60V2.local", alternativ kann auch direkt die IP-Adresse "192.168.15.1" eingegeben werden.
+
+Tip: falls das nicht klappt, kann das daran liegen daß auf dem Mobilgerät ein VPN aktiv ist, das also bitte abschalten.
+
+Es sollte sich dann direkt der Status-Bildschirm öffnen:
+![Status-Screen](https://obp60-v2-docu.readthedocs.io/en/latest/_images/Status_1.png)
+
+Über die Reiter oben auf dem Bildschirm kann man auf weitere Seiten navigieren:
+- Config: Systemeinstellungen und Auswahl der Bildschirme die das OBP60 anzeigen soll
+- XDR: Hier können NMEA Telegramme (XDR Sätze) definiert werden, um Daten weiterzugeben für die es kein geeignetes NMEA 183 Telegramm gibt
+. DATA: Zeigt alle Datensätze an, die für das Gerät definiert sind. Wenn es keine realen Daten gibt (z.B. weil NMEA2000 noch nicht angeschlossen ist), werden hier Striche angezeigt. 
+- Update: Erlaubt das Update der Geräte-Firmware. Dazu wird zunächst eine neue Firmware für das OBP60 auf das Mobilgerät heruntergeladen. Danach auf diese "Update" Seite gehen, die Firmware-Datei auf dem Mobilgerät auswählen und durch "Upload" installiert.
+-  Help: Zeigt eine Webseite mit Hilfeinformationen and, sobald das OBP60 Internetzugang hat, z.B. als Client eines LTE Routers. Das muß allerdings zunächst konfiguriert werden.
+
+Hier bitte zunächst nicht verändern.  
 
 ## Montage
 Um das Gerät zu montieren, soll es aufgeschraubt werden. Die beiden mitgelieferten Sechskantschrauben werden von innen durchgesteckt und dann das Gehäuse wieder verschraubt. 
@@ -38,9 +56,11 @@ Danach dei Dichtung auf die Rückseite des Gehäuses aufsetzen, Schrauben durchs
 ## Elektrische Anschlüsse
 Für den Normalbetrieb müssen mindestens die 12V Versorgung und ein Netzwerk, also NMEA2000 oder NMEA0183, angeschlossen werden. 
 
+Das OBP60 hat keine Anschlußbuchsen für NMEA2000 oder Seatalk NG, sondern Klemmblöcke auf die die Leitungen direkt aufgelegt werden. Um hier den Kontakt herstellen zu können, muß ggf. ein vorhandenes Kabel aufgeschnitten werden, die einzelnen Adern werden dann an den passenden Klemmblock angeschlossen.
+
 - 12V: [+] und [-] an die beiden oberen Anschlüsse am Klemmblock CN2
 - NMEA2000: Die Anschlüse CAN H, CAN L und Shield. Die Farbcodierung kann je nach System unterschiedlich sein, bei Raymarine Seatalk NG (das ja auch NMEA2000 ist) ist CAN L Weiss, CAN H blau. Shield ist die Abschirmung des Kabels 
-- NMEA0183: Hier werden die Signalleitungen für A und B sowie Shield angeschlossen
+- NMEA0183: Hier werden die Signalleitungen für A und B sowie Shield (Abschirmung) angeschlossen
 
 
 
