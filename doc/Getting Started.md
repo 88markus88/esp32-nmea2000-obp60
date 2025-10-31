@@ -84,6 +84,7 @@ Jede der Seiten kann frei mit einem der vielen Layouts belegt werden. Derzeit gi
 Je nach Seite können dann unterschiedliche Daten gezeigt werden. Welche das sind, wird in der Weboberfläche eingestellt. 
 
 Hier ein Beispiel:
+
 ![ThreeValues](https://github.com/88markus88/esp32-nmea2000-obp60/blob/Doku/doc/Page0_WindRoseFlex.png)
 
 In der obersten Zeile wird der Gerätestatus dargestellt. Hier sieht man gerade, daß das Gerät im Access Point Mode ist (AP), Daten über USB empfängt (USB) und daß Wischgesten genutzt werden könnnen (Hand-Symbol). In der Mitte wird die Nummer der aktuellen Seite dargestellt, und rechts die Uhrzeit und welche Zeit das ist - hier Local Time (LOT).
