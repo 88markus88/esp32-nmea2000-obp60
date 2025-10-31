@@ -51,7 +51,8 @@ Es sollte sich dann direkt der Status-Bildschirm öffnen:
 Hier bitte zunächst nicht verändern.  
 
 Tipps zur Verbindung: 
-- Oberhalb der Reiter für die Seiten ist ein farbiger Punkt sichtbar. Wenn der grün ist, steht die Verbindung, wenn er rot ist ist sie abgerissen. Das ist oft darauf zurückzuführen, daß das Mobilgerät auf ein anderes WLAN umgestellt hat. Deshalb:
+- Oberhalb der Reiter für die Seiten ist ein farbiger Punkt sichtbar. Wenn der grün ist, steht die Verbindung, wenn er rot ist ist sie abgerissen. 
+- Abreißen der Verbindung ist oft darauf zurückzuführen, daß das Mobilgerät auf ein anderes WLAN umgestellt hat. Deshalb:
 Das automatische Wiederherstellen der Wifi-Verbindung sollte aktiviert sein.
 Wenn noch ein weiteres WLAN aktiv ist, sollte das automatische Widerherstellen der Verbindung dazu deaktiviert sein. 
 
@@ -76,5 +77,6 @@ Das OBP60 hat keine Anschlußbuchsen für NMEA2000 oder Seatalk NG, sondern Klem
 Um sich mit dem OBP60 vertraut zu machen, ist es sinnvoll es zunächst via USB mit einem Computer zu verbinden, auf dem eine NMEA-Simulation läuft. Geeignet ist z.B. [NMEA Simulator](http://www.kave.fi/Apps/NMEA-Simulator/NMEA-Simulator.7z). Den Simulator installieren, dann den USB-Port für NMEA183 im Simulator auswählen und den Computer via USB mit dem OBP60 verbinden. Dann die Simulation via "Run" starten. Gewünschte Werte können im Hauptbildschirm des Simulators eingegeben werden. 
 
 Sobald die Verbindung zur Simulation steht, wird links oben im Display des OBP60 "USB" angezeigt. Die übertragenen Daten erscheinen auf dem Display:
+[](https://github.com/88markus88/esp32-nmea2000-obp60/blob/Doku/doc/Page4_ThreeValues.bmp)
 
 Gleichzeitig sind sie im Web-Interface eines eingeloggten Mobilgeräts zu sehen:
