@@ -76,7 +76,17 @@ FormattedData formatValue(GwApi::BoatValue *value, CommonData &commondata){
     const char* fmt_dec_1;
     const char* fmt_dec_10;
     const char* fmt_dec_100;
-    if (precision == "1") {
+	
+	// MP modified 2025-08-16
+	if (precision == "1fix") {
+        fmt_dec_1 = "%3.1f";
+        fmt_dec_10 = "%3.1f";
+        fmt_dec_100 = "%3.0f";
+    } else if(precision == "2fix"){
+        fmt_dec_1 = "%4.2f";
+        fmt_dec_10 = "%4.2f";
+        fmt_dec_100 = "%4.1f";
+    } else if (precision == "1") {
         fmt_dec_1 = "%3.1f";
         fmt_dec_10 = "%3.0f";
         fmt_dec_100 = "%3.0f";
@@ -85,7 +95,6 @@ FormattedData formatValue(GwApi::BoatValue *value, CommonData &commondata){
         fmt_dec_10 = "%3.1f";
         fmt_dec_100 = "%3.0f";
     }
-
 //    LOG_DEBUG(GwLog::DEBUG,"formatValue init: getFormat: %s date->value: %f time->value: %f", value->getFormat(), commondata.date->value, commondata.time->value);
     static const int bsize = 30;
     char buffer[bsize+1];

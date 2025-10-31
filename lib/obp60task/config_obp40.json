@@ -1134,10 +1134,12 @@
         "label": "Display value precision",
         "type": "list",
         "default": "2",
-        "description": "Maximum number of decimal places to display [1|2]",
+        "description": "Maximum number of decimal places to display [1|2|1fix|2fix]",
         "list": [
             "1",
-            "2"
+            "2",
+            "1fix",
+            "2fix"
         ],
         "category": "OBP40 Display",
         "capabilities": {

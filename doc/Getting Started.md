@@ -31,7 +31,7 @@ Das Gerät spannt ein eigenes WLAN auf. In der Netzwerkliste z.B. auf Android is
 ## Montage
 Um das Gerät zu montieren, soll es aufgeschraubt werden. Die beiden mitgelieferten Sechskantschrauben werden von innen durchgesteckt und dann das Gehäuse wieder verschraubt. 
 
-Der notwendige Ausschnitt für die Kabel und die beiden Schrauben sidn nach dem [Massbild](https://obp60-v2-docu.readthedocs.io/de/latest/_static/files/Drawing_OBP60_V2.pdf) zu erstellen.
+Der notwendige Ausschnitt für die Kabel und die beiden Schrauben sind nach dem [Massbild](https://obp60-v2-docu.readthedocs.io/de/latest/_static/files/Drawing_OBP60_V2.pdf) zu erstellen.
 
 Danach dei Dichtung auf die Rückseite des Gehäuses aufsetzen, Schrauben durchstecken und festschrauben.
 
