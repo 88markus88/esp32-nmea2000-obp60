@@ -72,11 +72,32 @@ Das OBP60 hat keine Anschlußbuchsen für NMEA2000 oder Seatalk NG, sondern Klem
 - NMEA2000: Die Anschlüse CAN H, CAN L und Shield. Die Farbcodierung kann je nach System unterschiedlich sein, bei Raymarine Seatalk NG (das ja auch NMEA2000 ist) ist CAN L Weiss, CAN H blau. Shield ist die Abschirmung des Kabels 
 - NMEA0183: Hier werden die Signalleitungen für A und B sowie Shield (Abschirmung) angeschlossen
 
+## Anzeigeseiten
+Das OBP60 kann Daten, die ihm bekannt sind, auf bis zu 10 Anzeigeseiten darstellen. Zwischen den Seiten schaltet man um, indem man entweder über die sechs Tasten unten wischt, oder auf eine der beiden mittleren Tasten clickt. In jedem Fall geht es um eine Seite weiter.
+
+Jede der Seiten kann frei mit einem der vielen Layouts belegt werden. Derzeit gibt es zum Beispiel:
+- Seiten mit einem, zwei, drei oder vier Zahlenwerten
+- Windrose mit vier Zusatzdaten
+- Windrose mit Schiffsdarstellung
+- Uhr
+- Windverlaufs-Grafik
+Je nach Seite können dann unterschiedliche Daten gezeigt werden. Welche das sind, wird in der Weboberfläche eingestellt. 
+
+Hier ein Beispiel:
+![ThreeValues](https://github.com/88markus88/esp32-nmea2000-obp60/blob/Doku/doc/Page0_WindRoseFlex.png)
+
+In der obersten Zeile wird der Gerätestatus dargestellt. Hier sieht man gerade, daß das Gerät im Access Point Mode ist (AP), Daten über USB empfängt (USB) und daß Wischgesten genutzt werden könnnen (Hand-Symbol). In der Mitte wird die Nummer der aktuellen Seite dargestellt, und rechts die Uhrzeit und welche Zeit das ist - hier Local Time (LOT).
+
+In der Mitte des Bildschirms sieht man die Nutzinformation des aktuellen Bildschirms.
+
+In der untersten Zeile wird angezeigt, wie die Tasten belegt sind. Rechts kann immer die Bildschirmbeleuchtung eingeschaltet werden, die mittleren beiden Tasten sind für die Navigation da. Wischgesten sind auch möglich.
+
 ## Simulation
 
 Um sich mit dem OBP60 vertraut zu machen, ist es sinnvoll es zunächst via USB mit einem Computer zu verbinden, auf dem eine NMEA-Simulation läuft. Geeignet ist z.B. [NMEA Simulator](http://www.kave.fi/Apps/NMEA-Simulator/NMEA-Simulator.7z). Den Simulator installieren, dann den USB-Port für NMEA183 im Simulator auswählen und den Computer via USB mit dem OBP60 verbinden. Dann die Simulation via "Run" starten. Gewünschte Werte können im Hauptbildschirm des Simulators eingegeben werden. 
 
 Sobald die Verbindung zur Simulation steht, wird links oben im Display des OBP60 "USB" angezeigt. Die übertragenen Daten erscheinen auf dem Display:
+
 ![ThreeValues](https://github.com/88markus88/esp32-nmea2000-obp60/blob/Doku/doc/Page4_ThreeValues.png)
 
 Gleichzeitig sind sie im Web-Interface eines eingeloggten Mobilgeräts zu sehen:
