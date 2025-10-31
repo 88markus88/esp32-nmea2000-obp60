@@ -56,22 +56,6 @@ Tipps zur Verbindung:
 Das automatische Wiederherstellen der Wifi-Verbindung sollte aktiviert sein.
 Wenn noch ein weiteres WLAN aktiv ist, sollte das automatische Widerherstellen der Verbindung dazu deaktiviert sein. 
 
-## Montage
-Um das Gerät zu montieren, soll es aufgeschraubt werden. Die beiden mitgelieferten Sechskantschrauben werden von innen durchgesteckt und dann das Gehäuse wieder verschraubt. 
-
-Der notwendige Ausschnitt für die Kabel und die beiden Schrauben sind nach dem [Massbild](https://obp60-v2-docu.readthedocs.io/de/latest/_static/files/Drawing_OBP60_V2.pdf) zu erstellen.
-
-Danach die Dichtung auf die Rückseite des Gehäuses aufsetzen, Schrauben durchstecken und festschrauben.
-
-## Elektrische Anschlüsse
-Für den Normalbetrieb müssen mindestens die 12V Versorgung und ein Netzwerk, also NMEA2000 oder NMEA0183, angeschlossen werden. 
-
-Das OBP60 hat keine Anschlußbuchsen für NMEA2000 oder Seatalk NG, sondern Klemmblöcke auf die die Leitungen direkt aufgelegt werden. Um hier den Kontakt herstellen zu können, muß ggf. ein vorhandenes Kabel aufgeschnitten werden, die einzelnen Adern werden dann an den passenden Klemmblock angeschlossen.
-
-- 12V: [+] und [-] an die beiden oberen Anschlüsse am Klemmblock CN2
-- NMEA2000: Die Anschlüse CAN H, CAN L und Shield. Die Farbcodierung kann je nach System unterschiedlich sein, bei Raymarine Seatalk NG (das ja auch NMEA2000 ist) ist CAN L Weiss, CAN H blau. Shield ist die Abschirmung des Kabels 
-- NMEA0183: Hier werden die Signalleitungen für A und B sowie Shield (Abschirmung) angeschlossen
-
 ## Anzeigeseiten
 Das OBP60 kann Daten, die ihm bekannt sind, auf bis zu 10 Anzeigeseiten darstellen. Zwischen den Seiten schaltet man um, indem man entweder über die sechs Tasten unten wischt, oder auf eine der beiden mittleren Tasten clickt. In jedem Fall geht es um eine Seite weiter.
 
@@ -102,3 +86,19 @@ Sobald die Verbindung zur Simulation steht, wird links oben im Display des OBP60
 ![ThreeValues](https://github.com/88markus88/esp32-nmea2000-obp60/blob/Doku/doc/Page4_ThreeValues.png)
 
 Gleichzeitig sind sie im Web-Interface eines eingeloggten Mobilgeräts zu sehen:
+
+## Elektrische Anschlüsse
+Für den Normalbetrieb müssen mindestens die 12V Versorgung und ein Netzwerk, also NMEA2000 oder NMEA0183, angeschlossen werden. 
+
+Das OBP60 hat keine Anschlußbuchsen für NMEA2000 oder Seatalk NG, sondern Klemmblöcke auf die die Leitungen direkt aufgelegt werden. Um hier den Kontakt herstellen zu können, muß ggf. ein vorhandenes Kabel aufgeschnitten werden, die einzelnen Adern werden dann an den passenden Klemmblock angeschlossen.
+
+- 12V: [+] und [-] an die beiden oberen Anschlüsse am Klemmblock CN2
+- NMEA2000: Die Anschlüse CAN H, CAN L und Shield. Die Farbcodierung kann je nach System unterschiedlich sein, bei Raymarine Seatalk NG (das ja auch NMEA2000 ist) ist CAN L Weiss, CAN H blau. Shield ist die Abschirmung des Kabels 
+- NMEA0183: Hier werden die Signalleitungen für A und B sowie Shield (Abschirmung) angeschlossen
+
+## Montage
+Um das Gerät zu montieren, soll es aufgeschraubt werden. Die beiden mitgelieferten Sechskantschrauben werden von innen durchgesteckt und dann das Gehäuse wieder verschraubt. 
+
+Der notwendige Ausschnitt für die Kabel und die beiden Schrauben sind nach dem [Massbild](https://obp60-v2-docu.readthedocs.io/de/latest/_static/files/Drawing_OBP60_V2.pdf) zu erstellen.
+
+Danach die Dichtung auf die Rückseite des Gehäuses aufsetzen, Schrauben durchstecken und festschrauben.
