@@ -22,8 +22,11 @@ USB-C wird am ovalen Stecker unterhalb des Anschlusses CN2 angeschlossen.
 Das Gerät braucht für den Betrieb die 12V Versorgung. Ein Testbetrieb am PC nur mit USB-C ist nicht möglich.
 
 Nach dem Einschalten der Stromversorgung piept das Gerät und zeigt diesen Startbildschirm:
+
 ![Startbildschirm](https://obp60-v2-docu.readthedocs.io/de/latest/_images/OBP60_OBP_Logo_tr.png)
+
 Kurz darauf wird ein QR-Code gezeigt, mit dem man sich per Handy direkt mit dem OBP60 verbinden kann. 
+
 ![QR Code](https://obp60-v2-docu.readthedocs.io/de/latest/_images/OBP60_QR_Code_tr.png)
 
 Das Gerät spannt ein eigenes WLAN auf. In der Netzwerkliste z.B. auf Android ist ganz unten ein QR-Symbol, darauf klicken und man kann den QR Code scannen, das Handy / Tablet loggt sich dann direkt in das WLAN des OBP60 ein. 
@@ -35,6 +38,7 @@ Sobald die Verbindung hergestellt ist, wird die Adresse des OBP60 eingegeben. Di
 Tip: falls das nicht klappt, kann das daran liegen daß auf dem Mobilgerät ein VPN aktiv ist, das also bitte abschalten.
 
 Es sollte sich dann direkt der Status-Bildschirm öffnen:
+
 ![Status-Screen](https://obp60-v2-docu.readthedocs.io/en/latest/_images/Status_1.png)
 
 Über die Reiter oben auf dem Bildschirm kann man auf weitere Seiten navigieren:
@@ -62,5 +66,6 @@ Das OBP60 hat keine Anschlußbuchsen für NMEA2000 oder Seatalk NG, sondern Klem
 - NMEA2000: Die Anschlüse CAN H, CAN L und Shield. Die Farbcodierung kann je nach System unterschiedlich sein, bei Raymarine Seatalk NG (das ja auch NMEA2000 ist) ist CAN L Weiss, CAN H blau. Shield ist die Abschirmung des Kabels 
 - NMEA0183: Hier werden die Signalleitungen für A und B sowie Shield (Abschirmung) angeschlossen
 
+## Simulation
 
-
+Um sich mit dem OBP60 vertraut zu machen, ist es sinnvoll es zunächst via USB mit einem Computer zu verbinden, auf dem eine NMEA-Simulation läuft. Geeignet ist z.B. [NMEA Simulator](http://www.kave.fi/Apps/NMEA-Simulator/NMEA-Simulator.7z). Den Simulator installieren, dann den USB-Port für NMEA183 im Simulator auswählen und den Computer via USB mit dem OBP60 verbinden. Dann die Simulation via "Run" starten. Gewünschte Werte können im Hauptbildschirm des Simulators eingegeben werden. 
