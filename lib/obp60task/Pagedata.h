@@ -4,7 +4,6 @@
 #include <functional>
 #include <vector>
 #include "LedSpiTask.h"
-#include "OBPRingBuffer.h"
 #include "OBPDataOperations.h"
 
 #define MAX_PAGE_NUMBER 10    // Max number of pages for show data
@@ -12,11 +11,12 @@
 typedef std::vector<GwApi::BoatValue *> ValueList;
 
 typedef struct{
+  GwApi *api;
   String pageName;
   uint8_t pageNumber; // page number in sequence of visible pages
   //the values will always contain the user defined values first
   ValueList values;
-  tBoatHstryData boatHstry;
+  HstryBuf* boatHstry;
 } PageData;
 
 // Sensor data structure (only for extended sensors, not for NMEA bus sensors)
@@ -99,20 +99,20 @@ typedef struct{
 } AlarmData;
 
 typedef struct{
-  GwApi::Status status;
-  GwLog *logger=NULL;
-  GwConfigHandler *config=NULL;
-  SensorData data;
-  SunData sundata;
-  TouchKeyData keydata[6];
-  BacklightData backlight;
-  AlarmData alarm;
-  GwApi::BoatValue *time=NULL;
-  GwApi::BoatValue *date=NULL;
-  uint16_t fgcolor;
-  uint16_t bgcolor;
-  bool keylock = false;
-  String powermode;
+    GwApi::Status status;
+    GwLog *logger = nullptr;
+    GwConfigHandler *config = nullptr;
+    SensorData data;
+    SunData sundata;
+    TouchKeyData keydata[6];
+    BacklightData backlight;
+    AlarmData alarm;
+    GwApi::BoatValue *time = nullptr;
+    GwApi::BoatValue *date = nullptr;
+    uint16_t fgcolor;
+    uint16_t bgcolor;
+    bool keylock = false;
+    String powermode;
 } CommonData;
 
 //a base class that all pages must inherit from
@@ -123,6 +123,7 @@ class Page{
     int refreshtime = 1000;
     virtual int displayPage(PageData &pageData)=0;
     virtual void displayNew(PageData &pageData){}
+    virtual void leavePage(PageData &pageData){}
     virtual void setupKeys() {
 #ifdef HARDWARE_V21
         commonData->keydata[0].label = "";
@@ -181,9 +182,9 @@ class PageDescription{
 
 class PageStruct{
     public:
-        Page *page=NULL;
+        Page *page = nullptr;
         PageData parameters;
-        PageDescription *description=NULL;
+        PageDescription *description = nullptr;
 };
 
 // Standard format functions without overhead
@@ -194,9 +195,10 @@ String formatLongitude(double lon);
 
 // Structure for formatted boat values
 typedef struct{
-  double value;
-  String svalue;
-  String unit;
+  double value; // SI value of boat data value
+  double cvalue; // value converted to target unit
+  String svalue; // value converted to target unit and formatted
+  String unit; // target value unit
 } FormattedData;
 
 // Formatter for boat values

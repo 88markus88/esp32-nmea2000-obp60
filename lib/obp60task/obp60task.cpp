@@ -13,16 +13,12 @@
 #include "OBP60Extensions.h"            // Functions lib for extension board
 #include "OBP60Keypad.h"                // Functions for keypad
 #include "BoatDataCalibration.h"        // Functions lib for data instance calibration
-#include "OBPRingBuffer.h"              // Functions lib with ring buffer for history storage of some boat data
 #include "OBPDataOperations.h"          // Functions lib for data operations such as true wind calculation
 
 #ifdef BOARD_OBP40S3
 #include "driver/rtc_io.h"              // Needs for weakup from deep sleep
 #include <SPI.h>
 #endif
-
-// True type character sets includes
-// See OBP60ExtensionPort.cpp
 
 // Pictures
 //#include GxEPD_BitmapExamples         // Example picture
@@ -125,8 +121,8 @@ void OBP60Init(GwApi *api){
 typedef struct {
         int page0=0;
         QueueHandle_t queue;
-        GwLog* logger = NULL;
-//        GwApi* api = NULL;
+        GwLog* logger = nullptr;
+//        GwApi* api = nullptr;
         uint sensitivity = 100;
         bool use_syspage = true;
     } MyData;
@@ -151,45 +147,37 @@ void keyboardTask(void *param){
     vTaskDelete(NULL);
 }
 
-class BoatValueList{
-    public:
-    static const int MAXVALUES=100;
-    //we create a list containing all our BoatValues
-    //this is the list we later use to let the api fill all the values
-    //additionally we put the necessary values into the paga data - see below
-    GwApi::BoatValue *allBoatValues[MAXVALUES];
-    int numValues=0;
-    
-    bool addValueToList(GwApi::BoatValue *v){
-        for (int i=0;i<numValues;i++){
-            if (allBoatValues[i] == v){
-                //already in list...
-                return true;
-            }
+// Scorgan: moved class declaration to header file <obp60task.h> to make class available to other functions
+// --- Class BoatValueList --------------
+bool BoatValueList::addValueToList(GwApi::BoatValue *v){
+    for (int i=0;i<numValues;i++){
+        if (allBoatValues[i] == v){
+            //already in list...
+            return true;
         }
-        if (numValues >= MAXVALUES) return false;
-        allBoatValues[numValues]=v;
-        numValues++;
-        return true;
     }
-    //helper to ensure that each BoatValue is only queried once
-    GwApi::BoatValue *findValueOrCreate(String name){
-        for (int i=0;i<numValues;i++){
-            if (allBoatValues[i]->getName() == name) {
-                return allBoatValues[i];
-            }
+    if (numValues >= MAXVALUES) return false;
+    allBoatValues[numValues]=v;
+    numValues++;
+    return true;
+}
+//helper to ensure that each BoatValue is only queried once
+GwApi::BoatValue *BoatValueList::findValueOrCreate(String name){
+    for (int i=0;i<numValues;i++){
+        if (allBoatValues[i]->getName() == name) {
+            return allBoatValues[i];
         }
-        GwApi::BoatValue *rt=new GwApi::BoatValue(name);
-        addValueToList(rt);
-        return rt;
     }
-};
+    GwApi::BoatValue *rt=new GwApi::BoatValue(name);
+    addValueToList(rt);
+    return rt;
+}
+// --- Class BoatValueList --------------
 
 //we want to have a list that has all our page definitions
 //this way each page can easily be added here
 //needs some minor tricks for the safe static initialization
 typedef std::vector<PageDescription*> Pages;
-//the page list class
 class PageList{
     public:
         Pages pages;
@@ -270,185 +258,71 @@ void registerAllPages(PageList &list){
     list.add(&registerPageXTETrack);
     extern PageDescription registerPageFluid;
     list.add(&registerPageFluid);
+    extern PageDescription registerPageSkyView;
+    list.add(&registerPageSkyView);
+    extern PageDescription registerPageNavigation;
+    list.add(&registerPageNavigation);
+    extern PageDescription registerPageDigitalOut;
+    list.add(&registerPageDigitalOut);
 }
 
 // Undervoltage detection for shutdown display
-void underVoltageDetection(GwApi *api, CommonData &common){
-    // Read settings
-    double voffset = (api->getConfig()->getConfigItem(api->getConfig()->vOffset,true)->asString()).toFloat();
-    double vslope = (api->getConfig()->getConfigItem(api->getConfig()->vSlope,true)->asString()).toFloat();
+void underVoltageError(CommonData &common) {
+#if defined VOLTAGE_SENSOR && defined LIPO_ACCU_1200
+    // Switch off all power lines
+    setPortPin(OBP_BACKLIGHT_LED, false);   // Backlight Off
+    setFlashLED(false);                     // Flash LED Off
+    buzzer(TONE4, 20);                      // Buzzer tone 4kHz 20ms
+    // Shutdown EInk display
+    getdisplay().setFullWindow();           // Set full Refresh
+    //getdisplay().setPartialWindow(0, 0, getdisplay().width(), getdisplay().height()); // Set partial update
+    getdisplay().fillScreen(common.bgcolor);// Clear screen
+    getdisplay().setTextColor(common.fgcolor);
+    getdisplay().setFont(&Ubuntu_Bold20pt8b);
+    getdisplay().setCursor(65, 150);
+    getdisplay().print("Undervoltage");
+    getdisplay().setFont(&Ubuntu_Bold8pt8b);
+    getdisplay().setCursor(65, 175);
+    getdisplay().print("Charge battery and restart system");
+    getdisplay().nextPage();                // Partial update
+    getdisplay().powerOff();                // Display power off
+    setPortPin(OBP_POWER_EPD, false);       // Power off ePaper display
+    setPortPin(OBP_POWER_SD, false);        // Power off SD card
+#else
+    // Switch off all power lines
+    setPortPin(OBP_BACKLIGHT_LED, false);   // Backlight Off
+    setFlashLED(false);                     // Flash LED Off
+    buzzer(TONE4, 20);                      // Buzzer tone 4kHz 20ms
+    setPortPin(OBP_POWER_50, false);        // Power rail 5.0V Off
+    // Shutdown EInk display
+    getdisplay().setPartialWindow(0, 0, getdisplay().width(), getdisplay().height()); // Set partial update
+    getdisplay().fillScreen(common.bgcolor);// Clear screen
+    getdisplay().setTextColor(common.fgcolor);
+    getdisplay().setFont(&Ubuntu_Bold20pt8b);
+    getdisplay().setCursor(65, 150);
+    getdisplay().print("Undervoltage");
+    getdisplay().setFont(&Ubuntu_Bold8pt8b);
+    getdisplay().setCursor(65, 175);
+    getdisplay().print("To wake up repower system");
+    getdisplay().nextPage();                // Partial update
+    getdisplay().powerOff();                // Display power off
+#endif
+    while (true) {
+        esp_deep_sleep_start(); // Deep Sleep without wakeup. Wakeup only after power cycle (restart).
+    }
+}
+
+inline bool underVoltageDetection(float voffset, float vslope) {
     // Read supply voltage
-    #if defined VOLTAGE_SENSOR && defined LIPO_ACCU_1200
+#if defined VOLTAGE_SENSOR && defined LIPO_ACCU_1200
     float actVoltage = (float(analogRead(OBP_ANALOG0)) * 3.3 / 4096 + 0.53) * 2;   // Vin = 1/2 for OBP40
     float minVoltage = 3.65;  // Absolut minimum volatge for 3,7V LiPo accu
-    #else
+#else
     float actVoltage = (float(analogRead(OBP_ANALOG0)) * 3.3 / 4096 + 0.17) * 20;   // Vin = 1/20 for OBP60
     float minVoltage = MIN_VOLTAGE;
-    #endif
-    double calVoltage = actVoltage * vslope + voffset;  // Calibration
-    if(calVoltage < minVoltage){
-        #if defined VOLTAGE_SENSOR && defined LIPO_ACCU_1200
-        // Switch off all power lines
-        setPortPin(OBP_BACKLIGHT_LED, false);   // Backlight Off
-        setFlashLED(false);                     // Flash LED Off            
-        buzzer(TONE4, 20);                      // Buzzer tone 4kHz 20ms
-        // Shutdown EInk display
-        getdisplay().setFullWindow();           // Set full Refresh
-        //getdisplay().setPartialWindow(0, 0, getdisplay().width(), getdisplay().height()); // Set partial update
-        getdisplay().fillScreen(common.bgcolor);// Clear screen
-        getdisplay().setTextColor(common.fgcolor);
-        getdisplay().setFont(&Ubuntu_Bold20pt8b);
-        getdisplay().setCursor(65, 150);
-        getdisplay().print("Undervoltage");
-        getdisplay().setFont(&Ubuntu_Bold8pt8b);
-        getdisplay().setCursor(65, 175);
-        getdisplay().print("Charge battery and restart system");
-        getdisplay().nextPage();                // Partial update
-        getdisplay().powerOff();                // Display power off
-        setPortPin(OBP_POWER_EPD, false);       // Power off ePaper display
-        setPortPin(OBP_POWER_SD, false);        // Power off SD card
-        #else
-        // Switch off all power lines
-        setPortPin(OBP_BACKLIGHT_LED, false);   // Backlight Off
-        setFlashLED(false);                     // Flash LED Off            
-        buzzer(TONE4, 20);                      // Buzzer tone 4kHz 20ms
-        setPortPin(OBP_POWER_50, false);        // Power rail 5.0V Off
-        // Shutdown EInk display
-        getdisplay().setPartialWindow(0, 0, getdisplay().width(), getdisplay().height()); // Set partial update
-        getdisplay().fillScreen(common.bgcolor);// Clear screen
-        getdisplay().setTextColor(common.fgcolor);
-        getdisplay().setFont(&Ubuntu_Bold20pt8b);
-        getdisplay().setCursor(65, 150);
-        getdisplay().print("Undervoltage");
-        getdisplay().setFont(&Ubuntu_Bold8pt8b);
-        getdisplay().setCursor(65, 175);
-        getdisplay().print("To wake up repower system");
-        getdisplay().nextPage();                // Partial update
-        getdisplay().powerOff();                // Display power off
-        #endif
-        // Stop system
-        while(true){
-            esp_deep_sleep_start();             // Deep Sleep without weakup. Weakup only after power cycle (restart).
-        }
-    }
-}
-
-//bool addTrueWind(GwApi* api, BoatValueList* boatValues, double *twd, double *tws, double *twa) {
-bool addTrueWind(GwApi* api, BoatValueList* boatValues) {
-    // Calculate true wind data and add to obp60task boat data list
-
-    double awaVal, awsVal, cogVal, stwVal, sogVal, hdtVal, hdmVal, varVal;
-    double twd, tws, twa;
-    bool isCalculated = false;
-    const double DBL_MIN = std::numeric_limits<double>::lowest();
-
-    GwApi::BoatValue *twdBVal = boatValues->findValueOrCreate("TWD");
-    GwApi::BoatValue *twsBVal = boatValues->findValueOrCreate("TWS");
-    GwApi::BoatValue *twaBVal = boatValues->findValueOrCreate("TWA");
-    GwApi::BoatValue *awaBVal = boatValues->findValueOrCreate("AWA");
-    GwApi::BoatValue *awsBVal = boatValues->findValueOrCreate("AWS");
-    GwApi::BoatValue *cogBVal = boatValues->findValueOrCreate("COG");
-    GwApi::BoatValue *stwBVal = boatValues->findValueOrCreate("STW");
-    GwApi::BoatValue *sogBVal = boatValues->findValueOrCreate("SOG");
-    GwApi::BoatValue *hdtBVal = boatValues->findValueOrCreate("HDT");
-    GwApi::BoatValue *hdmBVal = boatValues->findValueOrCreate("HDM");
-    GwApi::BoatValue *varBVal = boatValues->findValueOrCreate("VAR");
-    awaVal = awaBVal->valid ? awaBVal->value : DBL_MIN;
-    awsVal = awsBVal->valid ? awsBVal->value : DBL_MIN;
-    cogVal = cogBVal->valid ? cogBVal->value : DBL_MIN;
-    stwVal = stwBVal->valid ? stwBVal->value : DBL_MIN;
-    sogVal = sogBVal->valid ? sogBVal->value : DBL_MIN;
-    hdtVal = hdtBVal->valid ? hdtBVal->value : DBL_MIN;
-    hdmVal = hdmBVal->valid ? hdmBVal->value : DBL_MIN;
-    varVal = varBVal->valid ? varBVal->value : DBL_MIN;
-    api->getLogger()->logDebug(GwLog::DEBUG,"obp60task addTrueWind: AWA %.1f, AWS %.1f, COG %.1f, STW %.1f, SOG %.1f, HDT %.1f, HDM %.1f, VAR %.1f", awaBVal->value * RAD_TO_DEG, awsBVal->value * 3.6 / 1.852,
-            cogBVal->value * RAD_TO_DEG, stwBVal->value * 3.6 / 1.852, sogBVal->value * 3.6 / 1.852, hdtBVal->value * RAD_TO_DEG, hdmBVal->value * RAD_TO_DEG, varBVal->value * RAD_TO_DEG);
-
-    isCalculated = WindUtils::calcTrueWind(&awaVal, &awsVal, &cogVal, &stwVal, &sogVal, &hdtVal, &hdmVal, &varVal, &twd, &tws, &twa);
-
-    if (isCalculated) { // Replace values only, if successfully calculated and not already available
-        if (!twdBVal->valid) {
-            twdBVal->value = twd;
-            twdBVal->valid = true;
-        }
-        if (!twsBVal->valid) {
-            twsBVal->value = tws;
-            twsBVal->valid = true;
-        }
-        if (!twaBVal->valid) {
-            twaBVal->value = twa;
-            twaBVal->valid = true;
-        }
-    }
-    api->getLogger()->logDebug(GwLog::DEBUG,"obp60task addTrueWind: TWD_Valid %d, isCalculated %d, TWD %.1f, TWA %.1f, TWS %.1f", twdBVal->valid, isCalculated, twdBVal->value * RAD_TO_DEG,
-        twaBVal->value * RAD_TO_DEG, twsBVal->value * 3.6 / 1.852);
-
-    return isCalculated;
-}
-
-void initHstryBuf(GwApi* api, BoatValueList* boatValues, tBoatHstryData hstryBufList) {
-    // Init history buffers for TWD, TWS
-
-    GwApi::BoatValue *calBVal; // temp variable just for data calibration -> we don't want to calibrate the original data here
-
-    int hstryUpdFreq = 1000; // Update frequency for history buffers in ms
-    int hstryMinVal = 0; // Minimum value for these history buffers
-    int twdHstryMax = 6283; // Max value for wind direction (TWD) in rad (0...2*PI), shifted by 1000 for 3 decimals
-    int twsHstryMax = 1000; // Max value for wind speed (TWS) in m/s, shifted by 10 for 1 decimal
-    // Initialize history buffers with meta data
-    hstryBufList.twdHstry->setMetaData("TWD", "formatCourse", hstryUpdFreq, hstryMinVal, twdHstryMax);
-    hstryBufList.twsHstry->setMetaData("TWS", "formatKnots", hstryUpdFreq, hstryMinVal, twsHstryMax);
-
-    GwApi::BoatValue *twdBVal = boatValues->findValueOrCreate(hstryBufList.twdHstry->getName());
-    GwApi::BoatValue *twsBVal = boatValues->findValueOrCreate(hstryBufList.twsHstry->getName());
-    GwApi::BoatValue *twaBVal = boatValues->findValueOrCreate("TWA");
-}
-
-void handleHstryBuf(GwApi* api, BoatValueList* boatValues, tBoatHstryData hstryBufList) {
-    // Handle history buffers for TWD, TWS
-
-    GwLog *logger = api->getLogger();
-
-    int16_t twdHstryMin = hstryBufList.twdHstry->getMinVal();
-    int16_t twdHstryMax = hstryBufList.twdHstry->getMaxVal();
-    int16_t twsHstryMin = hstryBufList.twsHstry->getMinVal();
-    int16_t twsHstryMax = hstryBufList.twsHstry->getMaxVal();
-    int16_t twdBuf, twsBuf;
-    GwApi::BoatValue *calBVal; // temp variable just for data calibration -> we don't want to calibrate the original data here
-
-    GwApi::BoatValue *twdBVal = boatValues->findValueOrCreate(hstryBufList.twdHstry->getName());
-    GwApi::BoatValue *twsBVal = boatValues->findValueOrCreate(hstryBufList.twsHstry->getName());
-    GwApi::BoatValue *twaBVal = boatValues->findValueOrCreate("TWA");
-
-    api->getLogger()->logDebug(GwLog::DEBUG,"obp60task handleHstryBuf: twdBVal: %.1f, twaBVal: %.1f, twsBVal: %.1f, TWD_isValid? %d", twdBVal->value * RAD_TO_DEG,
-        twaBVal->value * RAD_TO_DEG, twsBVal->value * 3.6 / 1.852, twdBVal->valid);
-    calBVal = new GwApi::BoatValue("TWD"); // temporary solution for calibration of history buffer values
-    calBVal->setFormat(twdBVal->getFormat());
-    if (twdBVal->valid) {
-        calBVal->value = twdBVal->value;
-        calBVal->valid = twdBVal->valid;
-        calibrationData.calibrateInstance(calBVal, logger); // Check if boat data value is to be calibrated
-        twdBuf = static_cast<int16_t>(std::round(calBVal->value * 1000));
-        if (twdBuf >= twdHstryMin && twdBuf <= twdHstryMax) {
-            hstryBufList.twdHstry->add(twdBuf);
-        }
-    }
-    delete calBVal;
-    calBVal = nullptr;
-
-    calBVal = new GwApi::BoatValue("TWS"); // temporary solution for calibration of history buffer values
-    calBVal->setFormat(twsBVal->getFormat());
-    if (twsBVal->valid) {
-        calBVal->value = twsBVal->value;
-        calBVal->valid = twsBVal->valid;
-        calibrationData.calibrateInstance(calBVal, logger); // Check if boat data value is to be calibrated
-        twsBuf = static_cast<int16_t>(std::round(calBVal->value * 10));
-        if (twsBuf >= twsHstryMin && twsBuf <= twsHstryMax) {
-            hstryBufList.twsHstry->add(twsBuf);
-        }
-    }
-    delete calBVal;
-    calBVal = nullptr;
+#endif
+    float calVoltage = actVoltage * vslope + voffset;  // Calibration
+    return (calVoltage < minVoltage);
 }
 
 // OBP60 Task
@@ -561,13 +435,10 @@ void OBP60Task(GwApi *api){
     int lastPage=pageNumber;
 
     BoatValueList boatValues; //all the boat values for the api query
+    HstryBuf hstryBufList(1920);  // Create ring buffers for history storage of some boat data (1920 seconds = 32 minutes)
+    WindUtils trueWind(&boatValues);  // Create helper object for true wind calculation
     //commonData.distanceformat=config->getString(xxx);
     //add all necessary data to common data
-
-    // Create ring buffers for history storage of some boat data
-    RingBuffer<int16_t> twdHstry(960); // Circular buffer to store wind direction values; store 960 TWD values for 16 minutes history
-    RingBuffer<int16_t> twsHstry(960); // Circular buffer to store wind speed values (TWS)
-    tBoatHstryData hstryBufList = {&twdHstry, &twsHstry};
 
     //fill the page data from config
     numPages=config->getInt(config->visiblePages,1);
@@ -589,6 +460,7 @@ void OBP60Task(GwApi *api){
        pages[i].page=description->creator(commonData);
        pages[i].parameters.pageName=pageType;
        pages[i].parameters.pageNumber = i + 1;
+       pages[i].parameters.api = api;
        LOG_DEBUG(GwLog::DEBUG,"found page %s for number %d",pageType.c_str(),i);
        //fill in all the user defined parameters
        for (int uid=0;uid<description->userParam;uid++){
@@ -607,10 +479,8 @@ void OBP60Task(GwApi *api){
             LOG_DEBUG(GwLog::DEBUG,"added fixed value %s to page %d",value->getName().c_str(),i);
             pages[i].parameters.values.push_back(value); 
        }
-        if (pages[i].description->pageName == "WindPlot") {
-            // Add boat history data to page parameters
-            pages[i].parameters.boatHstry = hstryBufList;
-        }
+       // Add boat history data to page parameters
+       pages[i].parameters.boatHstry = &hstryBufList;
     }
     // add out of band system page (always available)
     Page *syspage = allPages.pages[0]->creator(commonData);
@@ -618,12 +488,12 @@ void OBP60Task(GwApi *api){
     // Read all calibration data settings from config
     calibrationData.readConfig(config, logger);
 
-    // Check user setting for true wind calculation
+    // Check user settings for true wind calculation
     bool calcTrueWnds = api->getConfig()->getBool(api->getConfig()->calcTrueWnds, false);
-    // bool simulation = api->getConfig()->getBool(api->getConfig()->useSimuData, false);
+    bool useSimuData = api->getConfig()->getBool(api->getConfig()->useSimuData, false);
 
     // Initialize history buffer for certain boat data
-    initHstryBuf(api, &boatValues, hstryBufList);
+    hstryBufList.init(&boatValues, logger);
 
     // Display screenshot handler for HTTP request
     // http://192.168.15.1/api/user/OBP60Task/screenshot
@@ -658,7 +528,9 @@ void OBP60Task(GwApi *api){
     commonData.backlight.brightness = 2.55 * uint(config->getConfigItem(config->blBrightness,true)->asInt());
     commonData.powermode = api->getConfig()->getConfigItem(api->getConfig()->powerMode,true)->asString();
 
-    bool uvoltage = api->getConfig()->getConfigItem(api->getConfig()->underVoltage,true)->asBoolean();
+    bool uvoltage = config->getConfigItem(config->underVoltage, true)->asBoolean();
+    float voffset = (config->getConfigItem(config->vOffset,true)->asString()).toFloat();
+    float vslope = (config->getConfigItem(config->vSlope,true)->asString()).toFloat();
     String cpuspeed = api->getConfig()->getConfigItem(api->getConfig()->cpuSpeed,true)->asString();
     uint hdopAccuracy = uint(api->getConfig()->getConfigItem(api->getConfig()->hdopAccuracy,true)->asInt());
 
@@ -666,7 +538,7 @@ void OBP60Task(GwApi *api){
     double homelon = commonData.config->getString(commonData.config->homeLON).toDouble();
     bool homevalid = homelat >= -180.0 and homelat <= 180 and homelon >= -90.0 and homelon <= 90.0;
     if (homevalid) {
-        LOG_DEBUG(GwLog::LOG, "Home location set to %f : %f", homelat, homelon);
+        LOG_DEBUG(GwLog::LOG, "Home location set to lat=%f, lon=%f", homelat, homelon);
     } else {
         LOG_DEBUG(GwLog::LOG, "No valid home location found");
     }
@@ -700,14 +572,18 @@ void OBP60Task(GwApi *api){
     //####################################################################################
 
     bool systemPage = false;
+    bool systemPageNew = false;
     Page *currentPage;
     while (true){
         delay(100);     // Delay 100ms (loop time)
         bool keypressed = false;
 
         // Undervoltage detection
-        if(uvoltage == true){
-            underVoltageDetection(api, commonData);
+        if (uvoltage == true) {
+            if (underVoltageDetection(voffset, vslope)) {
+                LOG_DEBUG(GwLog::ERROR, "Undervoltage detected, shutting down!");
+                underVoltageError(commonData);
+            }
         }
 
         // Set CPU speed after boot after 1min 
@@ -752,6 +628,7 @@ void OBP60Task(GwApi *api){
                     systemPage = true; // System page is out of band
                     syspage->setupKeys();
                     keyboardMessage = 0;
+                    systemPageNew = true;
                 }
                 else {
                     currentPage = pages[pageNumber].page;
@@ -837,8 +714,8 @@ void OBP60Task(GwApi *api){
                 }
             }
             
-            // Full display update afer a new selected page and 4s wait time
-            if(millis() > starttime4 + 4000 && delayedDisplayUpdate == true){
+            // Full display update afer a new selected page and 8s wait time
+            if(millis() > starttime4 + 8000 && delayedDisplayUpdate == true){
                 starttime1 = millis();
                 starttime2 = millis();
                 getdisplay().setFullWindow();    // Set full update
@@ -931,10 +808,10 @@ void OBP60Task(GwApi *api){
                 api->getStatus(commonData.status);
 
                 if (calcTrueWnds) {
-                    addTrueWind(api, &boatValues);
+                    trueWind.addTrueWind(api, &boatValues, logger);
                 }
-                // Handle history buffers for TWD, TWS for wind plot page and other usage
-                 handleHstryBuf(api, &boatValues, hstryBufList);
+                // Handle history buffers for certain boat data for windplot page and other usage
+                 hstryBufList.handleHstryBuf(useSimuData);
 
                 // Clear display
                 // getdisplay().fillRect(0, 0, getdisplay().width(), getdisplay().height(), commonData.bgcolor);
@@ -950,6 +827,11 @@ void OBP60Task(GwApi *api){
                 if (systemPage) {
                     displayFooter(commonData);
                     PageData sysparams; // empty
+                    sysparams.api = api;
+                    if (systemPageNew) {
+                        syspage->displayNew(sysparams);
+                        systemPageNew = false;
+                    }
                     syspage->displayPage(sysparams);
                 }
                 else {
@@ -966,10 +848,11 @@ void OBP60Task(GwApi *api){
                     }
                     else{
                         if (lastPage != pageNumber){
-                            if (hasFRAM) fram.write(FRAM_PAGE_NO, pageNumber); // remember page for device restart
+                            pages[lastPage].page->leavePage(pages[lastPage].parameters); // call page cleanup code
+                            if (hasFRAM) fram.write(FRAM_PAGE_NO, pageNumber); // remember new page for device restart
                             currentPage->setupKeys();
                             currentPage->displayNew(pages[pageNumber].parameters);
-                            lastPage=pageNumber;
+                            lastPage = pageNumber;
                         }
                         //call the page code
                         LOG_DEBUG(GwLog::DEBUG,"calling page %d",pageNumber);

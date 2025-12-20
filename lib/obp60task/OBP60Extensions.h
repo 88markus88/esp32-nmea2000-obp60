@@ -4,8 +4,10 @@
 #include <Arduino.h>
 #include "OBP60Hardware.h"
 #include "LedSpiTask.h"
+#include "Graphics.h"
 #include <GxEPD2_BW.h>                  // E-paper lib V2
 #include <Adafruit_FRAM_I2C.h>          // I2C FRAM
+#include <math.h>
 
 #ifdef BOARD_OBP40S3
 #include "esp_vfs_fat.h"
@@ -29,6 +31,9 @@
 #define FRAM_BAROGRAPH_START 0x0400
 #define FRAM_BAROGRAPH_END 0x13FF
 
+#define PI 3.1415926535897932384626433832795
+#define EARTH_RADIUS 6371000.0
+
 extern Adafruit_FRAM_I2C fram;
 extern bool hasFRAM;
 extern bool hasSDCard;
@@ -50,6 +55,7 @@ extern const GFXfont Ubuntu_Bold16pt8b;
 extern const GFXfont Ubuntu_Bold20pt8b;
 extern const GFXfont Ubuntu_Bold32pt8b;
 extern const GFXfont Atari16px;
+extern const GFXfont IBM8x8px;
 
 // Global functions
 #ifdef DISPLAY_GDEW042T2
@@ -73,13 +79,8 @@ GxEPD2_BW<GxEPD2_420_SE0420NQ04, GxEPD2_420_SE0420NQ04::HEIGHT> & getdisplay();
 #define PAGE_UPDATE 1      // page wants display to update
 #define PAGE_HIBERNATE 2   // page wants displey to hibernate
 
-struct Point {
-    double x;
-    double y;
-};
-Point rotatePoint(const Point& origin, const Point& p, double angle);
-std::vector<Point> rotatePoints(const Point& origin, const std::vector<Point>& pts, double angle);
 void fillPoly4(const std::vector<Point>& p4, uint16_t color);
+void drawPoly(const std::vector<Point>& points, uint16_t color);
 
 void deepSleep(CommonData &common);
 
@@ -88,8 +89,8 @@ uint8_t getLastPage();
 void hardwareInit(GwApi *api);
 void powerInit(String powermode);
 
+void setPCF8574PortPin(uint pin, uint8_t value);// Set PCF8574 port pin
 void setPortPin(uint pin, bool value);          // Set port pin for extension port
-
 void togglePortPin(uint pin);                   // Toggle extension port pin
 
 Color colorMapping(const String &colorString);          // Color mapping string to CHSV colors
@@ -108,6 +109,7 @@ String xdrDelete(String input);                 // Delete xdr prefix from string
 
 void drawTextCenter(int16_t cx, int16_t cy, String text);
 void drawTextRalign(int16_t x, int16_t y, String text);
+void drawTextBoxed(Rect box, String text, uint16_t fg, uint16_t bg, bool inverted, bool border);
 
 void displayTrendHigh(int16_t x, int16_t y, uint16_t size, uint16_t color);
 void displayTrendLow(int16_t x, int16_t y, uint16_t size, uint16_t color);
