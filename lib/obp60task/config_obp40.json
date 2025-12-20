@@ -224,7 +224,7 @@
         "label": "Calculate True Wind",
         "type": "boolean",
         "default": "false",
-        "description": "If not available, calculate true wind data from appearant wind and other boat data",
+        "description": "If not available, calculate true wind data from apparent wind and other boat data",
         "category": "OBP40 Settings",
         "capabilities": {
             "obp40": "true"
@@ -746,19 +746,8 @@
             "obp40":"true"
         },
         "condition": [
-            { "calInstance1": "AWA" },
-            { "calInstance1": "AWS" },
-            { "calInstance1": "COG" },
-            { "calInstance1": "DBT" },
-            { "calInstance1": "HDM" },
-            { "calInstance1": "PRPOS" },
-            { "calInstance1": "RPOS" },
-            { "calInstance1": "SOG" },
-            { "calInstance1": "STW" },
-            { "calInstance1": "TWA" },
-            { "calInstance1": "TWS" },
-            { "calInstance1": "TWD" },
-            { "calInstance1": "WTemp" } ]
+            { "calInstance1": ["AWA", "AWS", "COG", "DBT", "HDM", "PRPOS", "RPOS", "SOG", "STW", "TWA", "TWS", "TWD", "WTemp" ] }
+        ]
     },
     {
         "name": "calSlope1",
@@ -771,19 +760,8 @@
             "obp40":"true"
         },
         "condition": [
-            { "calInstance1": "AWA" },
-            { "calInstance1": "AWS" },
-            { "calInstance1": "COG" },
-            { "calInstance1": "DBT" },
-            { "calInstance1": "HDM" },
-            { "calInstance1": "PRPOS" },
-            { "calInstance1": "RPOS" },
-            { "calInstance1": "SOG" },
-            { "calInstance1": "STW" },
-            { "calInstance1": "TWA" },
-            { "calInstance1": "TWS" },
-            { "calInstance1": "TWD" },
-            { "calInstance1": "WTemp" }  ]
+            { "calInstance1": ["AWA", "AWS", "COG", "DBT", "HDM", "PRPOS", "RPOS", "SOG", "STW", "TWA", "TWS", "TWD", "WTemp" ] }
+        ]
     },
     {
         "name": "calSmooth1",
@@ -799,19 +777,8 @@
             "obp40":"true"
         },
         "condition": [
-            { "calInstance1": "AWA" },
-            { "calInstance1": "AWS" },
-            { "calInstance1": "COG" },
-            { "calInstance1": "DBT" },
-            { "calInstance1": "HDM" },
-            { "calInstance1": "PRPOS" },
-            { "calInstance1": "RPOS" },
-            { "calInstance1": "SOG" },
-            { "calInstance1": "STW" },
-            { "calInstance1": "TWA" },
-            { "calInstance1": "TWS" },
-            { "calInstance1": "TWD" },
-            { "calInstance1": "WTemp" }  ]
+            { "calInstance1": ["AWA", "AWS", "COG", "DBT", "HDM", "PRPOS", "RPOS", "SOG", "STW", "TWA", "TWS", "TWD", "WTemp" ] }
+        ]
     },
     {
         "name": "calInstance2",
@@ -851,19 +818,8 @@
             "obp40":"true"
         },
         "condition": [
-            { "calInstance2": "AWA" },
-            { "calInstance2": "AWS" },
-            { "calInstance2": "COG" },
-            { "calInstance2": "DBT" },
-            { "calInstance2": "HDM" },
-            { "calInstance2": "PRPOS" },
-            { "calInstance2": "RPOS" },
-            { "calInstance2": "SOG" },
-            { "calInstance2": "STW" },
-            { "calInstance2": "TWA" },
-            { "calInstance2": "TWS" },
-            { "calInstance2": "TWD" },
-            { "calInstance2": "WTemp" } ]
+            { "calInstance2": ["AWA", "AWS", "COG", "DBT", "HDM", "PRPOS", "RPOS", "SOG", "STW", "TWA", "TWS", "TWD", "WTemp" ] }
+        ]
     },
     {
         "name": "calSlope2",
@@ -876,19 +832,8 @@
             "obp40":"true"
         },
         "condition": [
-            { "calInstance2": "AWA" },
-            { "calInstance2": "AWS" },
-            { "calInstance2": "COG" },
-            { "calInstance2": "DBT" },
-            { "calInstance2": "HDM" },
-            { "calInstance2": "PRPOS" },
-            { "calInstance2": "RPOS" },
-            { "calInstance2": "SOG" },
-            { "calInstance2": "STW" },
-            { "calInstance2": "TWA" },
-            { "calInstance2": "TWS" },
-            { "calInstance2": "TWD" },
-            { "calInstance2": "WTemp" } ]
+            { "calInstance2": ["AWA", "AWS", "COG", "DBT", "HDM", "PRPOS", "RPOS", "SOG", "STW", "TWA", "TWS", "TWD", "WTemp" ] }
+        ]
     },
     {
         "name": "calSmooth2",
@@ -904,19 +849,8 @@
             "obp40":"true"
         },
         "condition": [
-            { "calInstance2": "AWA" },
-            { "calInstance2": "AWS" },
-            { "calInstance2": "COG" },
-            { "calInstance2": "DBT" },
-            { "calInstance2": "HDM" },
-            { "calInstance2": "PRPOS" },
-            { "calInstance2": "RPOS" },
-            { "calInstance2": "SOG" },
-            { "calInstance2": "STW" },
-            { "calInstance2": "TWA" },
-            { "calInstance2": "TWS" },
-            { "calInstance2": "TWD" },
-            { "calInstance2": "WTemp" } ]
+            { "calInstance2": ["AWA", "AWS", "COG", "DBT", "HDM", "PRPOS", "RPOS", "SOG", "STW", "TWA", "TWS", "TWD", "WTemp" ] }
+        ]
     },
     {
         "name": "calInstance3",
@@ -956,19 +890,8 @@
             "obp40":"true"
         },
         "condition": [
-            { "calInstance3": "AWA" },
-            { "calInstance3": "AWS" },
-            { "calInstance3": "COG" },
-            { "calInstance3": "DBT" },
-            { "calInstance3": "HDM" },
-            { "calInstance3": "PRPOS" },
-            { "calInstance3": "RPOS" },
-            { "calInstance3": "SOG" },
-            { "calInstance3": "STW" },
-            { "calInstance3": "TWA" },
-            { "calInstance3": "TWS" },
-            { "calInstance3": "TWD" },
-            { "calInstance3": "WTemp" } ]
+            { "calInstance3": ["AWA", "AWS", "COG", "DBT", "HDM", "PRPOS", "RPOS", "SOG", "STW", "TWA", "TWS", "TWD", "WTemp" ] }
+        ]
     },
     {
         "name": "calSlope3",
@@ -981,19 +904,8 @@
             "obp40":"true"
         },
         "condition": [
-            { "calInstance3": "AWA" },
-            { "calInstance3": "AWS" },
-            { "calInstance3": "COG" },
-            { "calInstance3": "DBT" },
-            { "calInstance3": "HDM" },
-            { "calInstance3": "PRPOS" },
-            { "calInstance3": "RPOS" },
-            { "calInstance3": "SOG" },
-            { "calInstance3": "STW" },
-            { "calInstance3": "TWA" },
-            { "calInstance3": "TWS" },
-            { "calInstance3": "TWD" },
-            { "calInstance3": "WTemp" } ]
+            { "calInstance3": ["AWA", "AWS", "COG", "DBT", "HDM", "PRPOS", "RPOS", "SOG", "STW", "TWA", "TWS", "TWD", "WTemp" ] }
+        ]
     },
     {
         "name": "calSmooth3",
@@ -1009,19 +921,147 @@
             "obp40":"true"
         },
         "condition": [
-            { "calInstance3": "AWA" },
-            { "calInstance3": "AWS" },
-            { "calInstance3": "COG" },
-            { "calInstance3": "DBT" },
-            { "calInstance3": "HDM" },
-            { "calInstance3": "PRPOS" },
-            { "calInstance3": "RPOS" },
-            { "calInstance3": "SOG" },
-            { "calInstance3": "STW" },
-            { "calInstance3": "TWA" },
-            { "calInstance3": "TWS" },
-            { "calInstance3": "TWD" },
-            { "calInstance3": "WTemp" } ]
+            { "calInstance3": ["AWA", "AWS", "COG", "DBT", "HDM", "PRPOS", "RPOS", "SOG", "STW", "TWA", "TWS", "TWD", "WTemp" ] }
+        ]
+    },
+    {
+        "name": "mapsource",
+        "label": "Map Source",
+        "type": "list",
+        "default": "OBP Service",
+        "description": "Type of map source, cloud service or local service",
+        "list": [
+            "OBP Service",
+            "Local Service"
+        ],
+        "category": "OBP40 Navigation",
+        "capabilities": {
+            "obp40":"true"
+        }
+    },
+    {
+        "name": "ipAddress",
+        "label": "IP Address",
+        "type": "string",
+        "default": "192.168.15.10",
+        "check": "checkIpAddress",
+        "description": "IP address for local map service e.g. 192.168.15.10\nor an MDNS name like Raspi.local",
+        "category": "OBP40 Navigation",
+        "capabilities": {
+            "obp40":"true"
+        },
+        "condition": [
+            { "mapsource": ["Local Service"] }
+        ]
+    },
+    {
+        "name": "localPort",
+        "label": "Port",
+        "type": "number",
+        "default": "8080",
+        "check":"checkPort",
+        "description": "TCP port for local map server",
+        "category": "OBP40 Navigation",
+        "capabilities": {
+            "obp40":"true"
+        },
+        "condition": [
+            { "mapsource": ["Local Service"] }
+        ]
+    },
+    {
+        "name": "maptype",
+        "label": "Map Type",
+        "type": "list",
+        "default": "Open Street Map",
+        "description": "Type of base navigation map with sea marks overlay",
+        "list": [
+            "Open Street Map",
+            "Google Street",
+            "Open Topo Map",
+            "Stadimaps Toner",
+            "Free Nautical Chart"
+        ],
+        "category": "OBP40 Navigation",
+        "capabilities": {
+            "obp40":"true"
+        }
+    },
+    {
+        "name": "refreshDistance",
+        "label": "Refresh Distance [m]",
+        "type": "number",
+        "default": "15",
+        "check": "checkMinMax",
+        "min": 1,
+        "max": 50,
+        "description": "Refresh distance between updates [1..50 m], 15 m = default",
+        "category": "OBP40 Navigation",
+        "capabilities": {
+            "obp40":"true"
+        }
+    },
+    {
+        "name": "zoomlevel",
+        "label": "Default Zoom Level",
+        "type": "number",
+        "default": "15",
+        "check": "checkMinMax",
+        "min": 7,
+        "max": 17,
+        "description": "Start zoom level for map [7..17]; 15 = default",
+        "category": "OBP40 Navigation",
+        "capabilities": {
+            "obp40":"true"
+        }
+    },
+    {
+        "name": "orientation",
+        "label": "Map Orientation",
+        "type": "list",
+        "default": "North Dirirection",
+        "description": "Map orientation for navigation",
+        "list": [
+            "North Direction",
+            "Travel Direction"
+        ],
+        "category": "OBP40 Navigation",
+        "capabilities": {
+            "obp40":"true"
+        }
+    },
+    {
+        "name": "grid",
+        "label": "Show Grid",
+        "type": "boolean",
+        "default": "false",
+        "description": "Show the grid for latutude and longitude",
+        "category": "OBP40 Navigation",
+        "capabilities": {
+            "obp40": "true"
+        }
+    },
+    {
+        "name": "showvalues",
+        "label": "Show Values",
+        "type": "boolean",
+        "default": "false",
+        "description": "Show boat data values in the left upper map corner",
+        "category": "OBP40 Navigation",
+        "capabilities": {
+            "obp40": "true"
+        }
+    },
+    {
+        "name": "ownheading",
+        "label": "Alternativ Heading",
+        "type": "boolean",
+        "default": "false",
+        "description": "Calculating an alternative travel direction for\na better and calmer map orientation",
+        "category": "OBP40 Navigation",
+        "capabilities": {
+            "obp40": "true"
+        }
     },
     {
         "name": "display",
@@ -1336,11 +1376,12 @@
             "obp40": "true"
         }
     },
+
     {
         "name": "page1type",
         "label": "Type",
         "type": "list",
-        "default": "Clock",
+        "default": "Voltage",
         "description": "Type of page for page 1",
         "list": [
             "BME280",
@@ -1348,16 +1389,19 @@
             "Battery2",
             "Clock",
             "Compass",
+            "DigitalOut",
             "DST810",
             "Fluid",
             "FourValues",
             "FourValues2",
             "Generator",
             "KeelPosition",
+            "Navigation",
             "OneValue",
             "RollPitch",
             "RudderPosition",
             "SixValues",
+            "SkyView",
             "Solar",
             "ThreeValues",
             "TwoValues",
@@ -1373,38 +1417,20 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "visiblePages": 1
-            },
-            {
-                "visiblePages": 2
-            },
-            {
-                "visiblePages": 3
-            },
-            {
-                "visiblePages": 4
-            },
-            {
-                "visiblePages": 5
-            },
-            {
-                "visiblePages": 6
-            },
-            {
-                "visiblePages": 7
-            },
-            {
-                "visiblePages": 8
-            },
-            {
-                "visiblePages": 9
-            },
-            {
-                "visiblePages": 10
-            }
-        ]
+        "condition": {
+            "visiblePages": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10"
+            ]
+        }
     },
     {
         "name": "page1value1",
@@ -1416,35 +1442,31 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "page1type": "Fluid"
-            },
-            {
-                "page1type": "FourValues"
-            },
-            {
-                "page1type": "FourValues2"
-            },
-            {
-                "page1type": "OneValue"
-            },
-            {
-                "page1type": "RollPitch"
-            },
-            {
-                "page1type": "SixValues"
-            },
-            {
-                "page1type": "ThreeValues"
-            },
-            {
-                "page1type": "TwoValues"
-            },
-            {
-                "page1type": "WindRoseFlex"
-            }
-        ]
+        "condition": {
+            "page1type": [
+                "Fluid",
+                "FourValues",
+                "FourValues2",
+                "OneValue",
+                "RollPitch",
+                "SixValues",
+                "ThreeValues",
+                "TwoValues",
+                "WindRoseFlex"
+            ],
+            "visiblePages": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10"
+            ]
+        }
     },
     {
         "name": "page1value2",
@@ -1456,29 +1478,29 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "page1type": "FourValues"
-            },
-            {
-                "page1type": "FourValues2"
-            },
-            {
-                "page1type": "RollPitch"
-            },
-            {
-                "page1type": "SixValues"
-            },
-            {
-                "page1type": "ThreeValues"
-            },
-            {
-                "page1type": "TwoValues"
-            },
-            {
-                "page1type": "WindRoseFlex"
-            }
-        ]
+        "condition": {
+            "page1type": [
+                "FourValues",
+                "FourValues2",
+                "RollPitch",
+                "SixValues",
+                "ThreeValues",
+                "TwoValues",
+                "WindRoseFlex"
+            ],
+            "visiblePages": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10"
+            ]
+        }
     },
     {
         "name": "page1value3",
@@ -1490,23 +1512,27 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "page1type": "FourValues"
-            },
-            {
-                "page1type": "FourValues2"
-            },
-            {
-                "page1type": "SixValues"
-            },
-            {
-                "page1type": "ThreeValues"
-            },
-            {
-                "page1type": "WindRoseFlex"
-            }
-        ]
+        "condition": {
+            "page1type": [
+                "FourValues",
+                "FourValues2",
+                "SixValues",
+                "ThreeValues",
+                "WindRoseFlex"
+            ],
+            "visiblePages": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10"
+            ]
+        }
     },
     {
         "name": "page1value4",
@@ -1518,20 +1544,26 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "page1type": "FourValues"
-            },
-            {
-                "page1type": "FourValues2"
-            },
-            {
-                "page1type": "SixValues"
-            },
-            {
-                "page1type": "WindRoseFlex"
-            }
-        ]
+        "condition": {
+            "page1type": [
+                "FourValues",
+                "FourValues2",
+                "SixValues",
+                "WindRoseFlex"
+            ],
+            "visiblePages": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10"
+            ]
+        }
     },
     {
         "name": "page1value5",
@@ -1543,14 +1575,23 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "page1type": "SixValues"
-            },
-            {
-                "page1type": "WindRoseFlex"
-            }
-        ]
+        "condition": {
+            "page1type": [
+                "SixValues"
+            ],
+            "visiblePages": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10"
+            ]
+        }
     },
     {
         "name": "page1value6",
@@ -1562,14 +1603,23 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "page1type": "SixValues"
-            },
-            {
-                "page1type": "WindRoseFlex"
-            }
-        ]
+        "condition": {
+            "page1type": [
+                "SixValues"
+            ],
+            "visiblePages": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10"
+            ]
+        }
     },
     {
         "name": "page1fluid",
@@ -1611,17 +1661,57 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "page1type": "Fluid"
-            }
-        ]
+        "condition": {
+            "page1type": "Fluid",
+            "visiblePages": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10"
+            ]
+        }
+    },
+    {
+        "name": "page1wndsrc",
+        "label": "Wind source",
+        "type": "list",
+        "default": "True wind",
+        "description": "Wind source for page 1: [true|apparent]",
+        "list": [
+            "True wind",
+            "apparent wind"
+        ],
+        "category": "OBP40 Page 1",
+        "capabilities": {
+            "obp40": "true"
+        },
+        "condition": {
+            "page1type": "WindPlot",
+            "visiblePages": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10"
+            ]
+        }
     },
     {
         "name": "page2type",
         "label": "Type",
         "type": "list",
-        "default": "Wind",
+        "default": "WindRose",
         "description": "Type of page for page 2",
         "list": [
             "BME280",
@@ -1629,16 +1719,19 @@
             "Battery2",
             "Clock",
             "Compass",
+            "DigitalOut",
             "DST810",
             "Fluid",
             "FourValues",
             "FourValues2",
             "Generator",
             "KeelPosition",
+            "Navigation",
             "OneValue",
             "RollPitch",
             "RudderPosition",
             "SixValues",
+            "SkyView",
             "Solar",
             "ThreeValues",
             "TwoValues",
@@ -1654,35 +1747,19 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "visiblePages": 2
-            },
-            {
-                "visiblePages": 3
-            },
-            {
-                "visiblePages": 4
-            },
-            {
-                "visiblePages": 5
-            },
-            {
-                "visiblePages": 6
-            },
-            {
-                "visiblePages": 7
-            },
-            {
-                "visiblePages": 8
-            },
-            {
-                "visiblePages": 9
-            },
-            {
-                "visiblePages": 10
-            }
-        ]
+        "condition": {
+            "visiblePages": [
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10"
+            ]
+        }
     },
     {
         "name": "page2value1",
@@ -1694,35 +1771,30 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "page2type": "Fluid"
-            },
-            {
-                "page2type": "FourValues"
-            },
-            {
-                "page2type": "FourValues2"
-            },
-            {
-                "page2type": "OneValue"
-            },
-            {
-                "page2type": "RollPitch"
-            },
-            {
-                "page2type": "SixValues"
-            },
-            {
-                "page2type": "ThreeValues"
-            },
-            {
-                "page2type": "TwoValues"
-            },
-            {
-                "page2type": "WindRoseFlex"
-            }
-        ]
+        "condition": {
+            "page2type": [
+                "Fluid",
+                "FourValues",
+                "FourValues2",
+                "OneValue",
+                "RollPitch",
+                "SixValues",
+                "ThreeValues",
+                "TwoValues",
+                "WindRoseFlex"
+            ],
+            "visiblePages": [
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10"
+            ]
+        }
     },
     {
         "name": "page2value2",
@@ -1734,29 +1806,28 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "page2type": "FourValues"
-            },
-            {
-                "page2type": "FourValues2"
-            },
-            {
-                "page2type": "RollPitch"
-            },
-            {
-                "page2type": "SixValues"
-            },
-            {
-                "page2type": "ThreeValues"
-            },
-            {
-                "page2type": "TwoValues"
-            },
-            {
-                "page2type": "WindRoseFlex"
-            }
-        ]
+        "condition": {
+            "page2type": [
+                "FourValues",
+                "FourValues2",
+                "RollPitch",
+                "SixValues",
+                "ThreeValues",
+                "TwoValues",
+                "WindRoseFlex"
+            ],
+            "visiblePages": [
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10"
+            ]
+        }
     },
     {
         "name": "page2value3",
@@ -1768,23 +1839,26 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "page2type": "FourValues"
-            },
-            {
-                "page2type": "FourValues2"
-            },
-            {
-                "page2type": "SixValues"
-            },
-            {
-                "page2type": "ThreeValues"
-            },
-            {
-                "page2type": "WindRoseFlex"
-            }
-        ]
+        "condition": {
+            "page2type": [
+                "FourValues",
+                "FourValues2",
+                "SixValues",
+                "ThreeValues",
+                "WindRoseFlex"
+            ],
+            "visiblePages": [
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10"
+            ]
+        }
     },
     {
         "name": "page2value4",
@@ -1796,20 +1870,25 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "page2type": "FourValues"
-            },
-            {
-                "page2type": "FourValues2"
-            },
-            {
-                "page2type": "SixValues"
-            },
-            {
-                "page2type": "WindRoseFlex"
-            }
-        ]
+        "condition": {
+            "page2type": [
+                "FourValues",
+                "FourValues2",
+                "SixValues",
+                "WindRoseFlex"
+            ],
+            "visiblePages": [
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10"
+            ]
+        }
     },
     {
         "name": "page2value5",
@@ -1821,14 +1900,22 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "page2type": "SixValues"
-            },
-            {
-                "page2type": "WindRoseFlex"
-            }
-        ]
+        "condition": {
+            "page2type": [
+                "SixValues"
+            ],
+            "visiblePages": [
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10"
+            ]
+        }
     },
     {
         "name": "page2value6",
@@ -1840,14 +1927,22 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "page2type": "SixValues"
-            },
-            {
-                "page2type": "WindRoseFlex"
-            }
-        ]
+        "condition": {
+            "page2type": [
+                "SixValues"
+            ],
+            "visiblePages": [
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10"
+            ]
+        }
     },
     {
         "name": "page2fluid",
@@ -1889,11 +1984,49 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "page2type": "Fluid"
-            }
-        ]
+        "condition": {
+            "page2type": "Fluid",
+            "visiblePages": [
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10"
+            ]
+        }
+    },
+    {
+        "name": "page2wndsrc",
+        "label": "Wind source",
+        "type": "list",
+        "default": "True wind",
+        "description": "Wind source for page 2: [true|apparent]",
+        "list": [
+            "True wind",
+            "apparent wind"
+        ],
+        "category": "OBP40 Page 2",
+        "capabilities": {
+            "obp40": "true"
+        },
+        "condition": {
+            "page2type": "WindPlot",
+            "visiblePages": [
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10"
+            ]
+        }
     },
     {
         "name": "page3type",
@@ -1907,16 +2040,19 @@
             "Battery2",
             "Clock",
             "Compass",
+            "DigitalOut",
             "DST810",
             "Fluid",
             "FourValues",
             "FourValues2",
             "Generator",
             "KeelPosition",
+            "Navigation",
             "OneValue",
             "RollPitch",
             "RudderPosition",
             "SixValues",
+            "SkyView",
             "Solar",
             "ThreeValues",
             "TwoValues",
@@ -1932,32 +2068,18 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "visiblePages": 3
-            },
-            {
-                "visiblePages": 4
-            },
-            {
-                "visiblePages": 5
-            },
-            {
-                "visiblePages": 6
-            },
-            {
-                "visiblePages": 7
-            },
-            {
-                "visiblePages": 8
-            },
-            {
-                "visiblePages": 9
-            },
-            {
-                "visiblePages": 10
-            }
-        ]
+        "condition": {
+            "visiblePages": [
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10"
+            ]
+        }
     },
     {
         "name": "page3value1",
@@ -1969,35 +2091,29 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "page3type": "Fluid"
-            },
-            {
-                "page3type": "FourValues"
-            },
-            {
-                "page3type": "FourValues2"
-            },
-            {
-                "page3type": "OneValue"
-            },
-            {
-                "page3type": "RollPitch"
-            },
-            {
-                "page3type": "SixValues"
-            },
-            {
-                "page3type": "ThreeValues"
-            },
-            {
-                "page3type": "TwoValues"
-            },
-            {
-                "page3type": "WindRoseFlex"
-            }
-        ]
+        "condition": {
+            "page3type": [
+                "Fluid",
+                "FourValues",
+                "FourValues2",
+                "OneValue",
+                "RollPitch",
+                "SixValues",
+                "ThreeValues",
+                "TwoValues",
+                "WindRoseFlex"
+            ],
+            "visiblePages": [
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10"
+            ]
+        }
     },
     {
         "name": "page3value2",
@@ -2009,29 +2125,27 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "page3type": "FourValues"
-            },
-            {
-                "page3type": "FourValues2"
-            },
-            {
-                "page3type": "RollPitch"
-            },
-            {
-                "page3type": "SixValues"
-            },
-            {
-                "page3type": "ThreeValues"
-            },
-            {
-                "page3type": "TwoValues"
-            },
-            {
-                "page3type": "WindRoseFlex"
-            }
-        ]
+        "condition": {
+            "page3type": [
+                "FourValues",
+                "FourValues2",
+                "RollPitch",
+                "SixValues",
+                "ThreeValues",
+                "TwoValues",
+                "WindRoseFlex"
+            ],
+            "visiblePages": [
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10"
+            ]
+        }
     },
     {
         "name": "page3value3",
@@ -2043,23 +2157,25 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "page3type": "FourValues"
-            },
-            {
-                "page3type": "FourValues2"
-            },
-            {
-                "page3type": "SixValues"
-            },
-            {
-                "page3type": "ThreeValues"
-            },
-            {
-                "page3type": "WindRoseFlex"
-            }
-        ]
+        "condition": {
+            "page3type": [
+                "FourValues",
+                "FourValues2",
+                "SixValues",
+                "ThreeValues",
+                "WindRoseFlex"
+            ],
+            "visiblePages": [
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10"
+            ]
+        }
     },
     {
         "name": "page3value4",
@@ -2071,20 +2187,24 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "page3type": "FourValues"
-            },
-            {
-                "page3type": "FourValues2"
-            },
-            {
-                "page3type": "SixValues"
-            },
-            {
-                "page3type": "WindRoseFlex"
-            }
-        ]
+        "condition": {
+            "page3type": [
+                "FourValues",
+                "FourValues2",
+                "SixValues",
+                "WindRoseFlex"
+            ],
+            "visiblePages": [
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10"
+            ]
+        }
     },
     {
         "name": "page3value5",
@@ -2096,14 +2216,21 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "page3type": "SixValues"
-            },
-            {
-                "page3type": "WindRoseFlex"
-            }
-        ]
+        "condition": {
+            "page3type": [
+                "SixValues"
+            ],
+            "visiblePages": [
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10"
+            ]
+        }
     },
     {
         "name": "page3value6",
@@ -2115,14 +2242,21 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "page3type": "SixValues"
-            },
-            {
-                "page3type": "WindRoseFlex"
-            }
-        ]
+        "condition": {
+            "page3type": [
+                "SixValues"
+            ],
+            "visiblePages": [
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10"
+            ]
+        }
     },
     {
         "name": "page3fluid",
@@ -2164,11 +2298,47 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "page3type": "Fluid"
-            }
-        ]
+        "condition": {
+            "page3type": "Fluid",
+            "visiblePages": [
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10"
+            ]
+        }
+    },
+    {
+        "name": "page3wndsrc",
+        "label": "Wind source",
+        "type": "list",
+        "default": "True wind",
+        "description": "Wind source for page 3: [true|apparent]",
+        "list": [
+            "True wind",
+            "apparent wind"
+        ],
+        "category": "OBP40 Page 3",
+        "capabilities": {
+            "obp40": "true"
+        },
+        "condition": {
+            "page3type": "WindPlot",
+            "visiblePages": [
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10"
+            ]
+        }
     },
     {
         "name": "page4type",
@@ -2182,16 +2352,19 @@
             "Battery2",
             "Clock",
             "Compass",
+            "DigitalOut",
             "DST810",
             "Fluid",
             "FourValues",
             "FourValues2",
             "Generator",
             "KeelPosition",
+            "Navigation",
             "OneValue",
             "RollPitch",
             "RudderPosition",
             "SixValues",
+            "SkyView",
             "Solar",
             "ThreeValues",
             "TwoValues",
@@ -2207,29 +2380,17 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "visiblePages": 4
-            },
-            {
-                "visiblePages": 5
-            },
-            {
-                "visiblePages": 6
-            },
-            {
-                "visiblePages": 7
-            },
-            {
-                "visiblePages": 8
-            },
-            {
-                "visiblePages": 9
-            },
-            {
-                "visiblePages": 10
-            }
-        ]
+        "condition": {
+            "visiblePages": [
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10"
+            ]
+        }
     },
     {
         "name": "page4value1",
@@ -2241,35 +2402,28 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "page4type": "Fluid"
-            },
-            {
-                "page4type": "FourValues"
-            },
-            {
-                "page4type": "FourValues2"
-            },
-            {
-                "page4type": "OneValue"
-            },
-            {
-                "page4type": "RollPitch"
-            },
-            {
-                "page4type": "SixValues"
-            },
-            {
-                "page4type": "ThreeValues"
-            },
-            {
-                "page4type": "TwoValues"
-            },
-            {
-                "page4type": "WindRoseFlex"
-            }
-        ]
+        "condition": {
+            "page4type": [
+                "Fluid",
+                "FourValues",
+                "FourValues2",
+                "OneValue",
+                "RollPitch",
+                "SixValues",
+                "ThreeValues",
+                "TwoValues",
+                "WindRoseFlex"
+            ],
+            "visiblePages": [
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10"
+            ]
+        }
     },
     {
         "name": "page4value2",
@@ -2281,29 +2435,26 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "page4type": "FourValues"
-            },
-            {
-                "page4type": "FourValues2"
-            },
-            {
-                "page4type": "RollPitch"
-            },
-            {
-                "page4type": "SixValues"
-            },
-            {
-                "page4type": "ThreeValues"
-            },
-            {
-                "page4type": "TwoValues"
-            },
-            {
-                "page4type": "WindRoseFlex"
-            }
-        ]
+        "condition": {
+            "page4type": [
+                "FourValues",
+                "FourValues2",
+                "RollPitch",
+                "SixValues",
+                "ThreeValues",
+                "TwoValues",
+                "WindRoseFlex"
+            ],
+            "visiblePages": [
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10"
+            ]
+        }
     },
     {
         "name": "page4value3",
@@ -2315,23 +2466,24 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "page4type": "FourValues"
-            },
-            {
-                "page4type": "FourValues2"
-            },
-            {
-                "page4type": "SixValues"
-            },
-            {
-                "page4type": "ThreeValues"
-            },
-            {
-                "page4type": "WindRoseFlex"
-            }
-        ]
+        "condition": {
+            "page4type": [
+                "FourValues",
+                "FourValues2",
+                "SixValues",
+                "ThreeValues",
+                "WindRoseFlex"
+            ],
+            "visiblePages": [
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10"
+            ]
+        }
     },
     {
         "name": "page4value4",
@@ -2343,20 +2495,23 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "page4type": "FourValues"
-            },
-            {
-                "page4type": "FourValues2"
-            },
-            {
-                "page4type": "SixValues"
-            },
-            {
-                "page4type": "WindRoseFlex"
-            }
-        ]
+        "condition": {
+            "page4type": [
+                "FourValues",
+                "FourValues2",
+                "SixValues",
+                "WindRoseFlex"
+            ],
+            "visiblePages": [
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10"
+            ]
+        }
     },
     {
         "name": "page4value5",
@@ -2368,14 +2523,20 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "page4type": "SixValues"
-            },
-            {
-                "page4type": "WindRoseFlex"
-            }
-        ]
+        "condition": {
+            "page4type": [
+                "SixValues"
+            ],
+            "visiblePages": [
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10"
+            ]
+        }
     },
     {
         "name": "page4value6",
@@ -2387,14 +2548,20 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "page4type": "SixValues"
-            },
-            {
-                "page4type": "WindRoseFlex"
-            }
-        ]
+        "condition": {
+            "page4type": [
+                "SixValues"
+            ],
+            "visiblePages": [
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10"
+            ]
+        }
     },
     {
         "name": "page4fluid",
@@ -2436,11 +2603,45 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "page4type": "Fluid"
-            }
-        ]
+        "condition": {
+            "page4type": "Fluid",
+            "visiblePages": [
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10"
+            ]
+        }
+    },
+    {
+        "name": "page4wndsrc",
+        "label": "Wind source",
+        "type": "list",
+        "default": "True wind",
+        "description": "Wind source for page 4: [true|apparent]",
+        "list": [
+            "True wind",
+            "apparent wind"
+        ],
+        "category": "OBP40 Page 4",
+        "capabilities": {
+            "obp40": "true"
+        },
+        "condition": {
+            "page4type": "WindPlot",
+            "visiblePages": [
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10"
+            ]
+        }
     },
     {
         "name": "page5type",
@@ -2454,16 +2655,19 @@
             "Battery2",
             "Clock",
             "Compass",
+            "DigitalOut",
             "DST810",
             "Fluid",
             "FourValues",
             "FourValues2",
             "Generator",
             "KeelPosition",
+            "Navigation",
             "OneValue",
             "RollPitch",
             "RudderPosition",
             "SixValues",
+            "SkyView",
             "Solar",
             "ThreeValues",
             "TwoValues",
@@ -2479,26 +2683,16 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "visiblePages": 5
-            },
-            {
-                "visiblePages": 6
-            },
-            {
-                "visiblePages": 7
-            },
-            {
-                "visiblePages": 8
-            },
-            {
-                "visiblePages": 9
-            },
-            {
-                "visiblePages": 10
-            }
-        ]
+        "condition": {
+            "visiblePages": [
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10"
+            ]
+        }
     },
     {
         "name": "page5value1",
@@ -2510,35 +2704,27 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "page5type": "Fluid"
-            },
-            {
-                "page5type": "FourValues"
-            },
-            {
-                "page5type": "FourValues2"
-            },
-            {
-                "page5type": "OneValue"
-            },
-            {
-                "page5type": "RollPitch"
-            },
-            {
-                "page5type": "SixValues"
-            },
-            {
-                "page5type": "ThreeValues"
-            },
-            {
-                "page5type": "TwoValues"
-            },
-            {
-                "page5type": "WindRoseFlex"
-            }
-        ]
+        "condition": {
+            "page5type": [
+                "Fluid",
+                "FourValues",
+                "FourValues2",
+                "OneValue",
+                "RollPitch",
+                "SixValues",
+                "ThreeValues",
+                "TwoValues",
+                "WindRoseFlex"
+            ],
+            "visiblePages": [
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10"
+            ]
+        }
     },
     {
         "name": "page5value2",
@@ -2550,29 +2736,25 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "page5type": "FourValues"
-            },
-            {
-                "page5type": "FourValues2"
-            },
-            {
-                "page5type": "RollPitch"
-            },
-            {
-                "page5type": "SixValues"
-            },
-            {
-                "page5type": "ThreeValues"
-            },
-            {
-                "page5type": "TwoValues"
-            },
-            {
-                "page5type": "WindRoseFlex"
-            }
-        ]
+        "condition": {
+            "page5type": [
+                "FourValues",
+                "FourValues2",
+                "RollPitch",
+                "SixValues",
+                "ThreeValues",
+                "TwoValues",
+                "WindRoseFlex"
+            ],
+            "visiblePages": [
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10"
+            ]
+        }
     },
     {
         "name": "page5value3",
@@ -2584,23 +2766,23 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "page5type": "FourValues"
-            },
-            {
-                "page5type": "FourValues2"
-            },
-            {
-                "page5type": "SixValues"
-            },
-            {
-                "page5type": "ThreeValues"
-            },
-            {
-                "page5type": "WindRoseFlex"
-            }
-        ]
+        "condition": {
+            "page5type": [
+                "FourValues",
+                "FourValues2",
+                "SixValues",
+                "ThreeValues",
+                "WindRoseFlex"
+            ],
+            "visiblePages": [
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10"
+            ]
+        }
     },
     {
         "name": "page5value4",
@@ -2612,20 +2794,22 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "page5type": "FourValues"
-            },
-            {
-                "page5type": "FourValues2"
-            },
-            {
-                "page5type": "SixValues"
-            },
-            {
-                "page5type": "WindRoseFlex"
-            }
-        ]
+        "condition": {
+            "page5type": [
+                "FourValues",
+                "FourValues2",
+                "SixValues",
+                "WindRoseFlex"
+            ],
+            "visiblePages": [
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10"
+            ]
+        }
     },
     {
         "name": "page5value5",
@@ -2637,14 +2821,19 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "page5type": "SixValues"
-            },
-            {
-                "page5type": "WindRoseFlex"
-            }
-        ]
+        "condition": {
+            "page5type": [
+                "SixValues"
+            ],
+            "visiblePages": [
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10"
+            ]
+        }
     },
     {
         "name": "page5value6",
@@ -2656,14 +2845,19 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "page5type": "SixValues"
-            },
-            {
-                "page5type": "WindRoseFlex"
-            }
-        ]
+        "condition": {
+            "page5type": [
+                "SixValues"
+            ],
+            "visiblePages": [
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10"
+            ]
+        }
     },
     {
         "name": "page5fluid",
@@ -2705,11 +2899,43 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "page5type": "Fluid"
-            }
-        ]
+        "condition": {
+            "page5type": "Fluid",
+            "visiblePages": [
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10"
+            ]
+        }
+    },
+    {
+        "name": "page5wndsrc",
+        "label": "Wind source",
+        "type": "list",
+        "default": "True wind",
+        "description": "Wind source for page 5: [true|apparent]",
+        "list": [
+            "True wind",
+            "apparent wind"
+        ],
+        "category": "OBP40 Page 5",
+        "capabilities": {
+            "obp40": "true"
+        },
+        "condition": {
+            "page5type": "WindPlot",
+            "visiblePages": [
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10"
+            ]
+        }
     },
     {
         "name": "page6type",
@@ -2723,16 +2949,19 @@
             "Battery2",
             "Clock",
             "Compass",
+            "DigitalOut",
             "DST810",
             "Fluid",
             "FourValues",
             "FourValues2",
             "Generator",
             "KeelPosition",
+            "Navigation",
             "OneValue",
             "RollPitch",
             "RudderPosition",
             "SixValues",
+            "SkyView",
             "Solar",
             "ThreeValues",
             "TwoValues",
@@ -2748,23 +2977,15 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "visiblePages": 6
-            },
-            {
-                "visiblePages": 7
-            },
-            {
-                "visiblePages": 8
-            },
-            {
-                "visiblePages": 9
-            },
-            {
-                "visiblePages": 10
-            }
-        ]
+        "condition": {
+            "visiblePages": [
+                "6",
+                "7",
+                "8",
+                "9",
+                "10"
+            ]
+        }
     },
     {
         "name": "page6value1",
@@ -2776,35 +2997,26 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "page6type": "Fluid"
-            },
-            {
-                "page6type": "FourValues"
-            },
-            {
-                "page6type": "FourValues2"
-            },
-            {
-                "page6type": "OneValue"
-            },
-            {
-                "page6type": "RollPitch"
-            },
-            {
-                "page6type": "SixValues"
-            },
-            {
-                "page6type": "ThreeValues"
-            },
-            {
-                "page6type": "TwoValues"
-            },
-            {
-                "page6type": "WindRoseFlex"
-            }
-        ]
+        "condition": {
+            "page6type": [
+                "Fluid",
+                "FourValues",
+                "FourValues2",
+                "OneValue",
+                "RollPitch",
+                "SixValues",
+                "ThreeValues",
+                "TwoValues",
+                "WindRoseFlex"
+            ],
+            "visiblePages": [
+                "6",
+                "7",
+                "8",
+                "9",
+                "10"
+            ]
+        }
     },
     {
         "name": "page6value2",
@@ -2816,29 +3028,24 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "page6type": "FourValues"
-            },
-            {
-                "page6type": "FourValues2"
-            },
-            {
-                "page6type": "RollPitch"
-            },
-            {
-                "page6type": "SixValues"
-            },
-            {
-                "page6type": "ThreeValues"
-            },
-            {
-                "page6type": "TwoValues"
-            },
-            {
-                "page6type": "WindRoseFlex"
-            }
-        ]
+        "condition": {
+            "page6type": [
+                "FourValues",
+                "FourValues2",
+                "RollPitch",
+                "SixValues",
+                "ThreeValues",
+                "TwoValues",
+                "WindRoseFlex"
+            ],
+            "visiblePages": [
+                "6",
+                "7",
+                "8",
+                "9",
+                "10"
+            ]
+        }
     },
     {
         "name": "page6value3",
@@ -2850,23 +3057,22 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "page6type": "FourValues"
-            },
-            {
-                "page6type": "FourValues2"
-            },
-            {
-                "page6type": "SixValues"
-            },
-            {
-                "page6type": "ThreeValues"
-            },
-            {
-                "page6type": "WindRoseFlex"
-            }
-        ]
+        "condition": {
+            "page6type": [
+                "FourValues",
+                "FourValues2",
+                "SixValues",
+                "ThreeValues",
+                "WindRoseFlex"
+            ],
+            "visiblePages": [
+                "6",
+                "7",
+                "8",
+                "9",
+                "10"
+            ]
+        }
     },
     {
         "name": "page6value4",
@@ -2878,20 +3084,21 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "page6type": "FourValues"
-            },
-            {
-                "page6type": "FourValues2"
-            },
-            {
-                "page6type": "SixValues"
-            },
-            {
-                "page6type": "WindRoseFlex"
-            }
-        ]
+        "condition": {
+            "page6type": [
+                "FourValues",
+                "FourValues2",
+                "SixValues",
+                "WindRoseFlex"
+            ],
+            "visiblePages": [
+                "6",
+                "7",
+                "8",
+                "9",
+                "10"
+            ]
+        }
     },
     {
         "name": "page6value5",
@@ -2903,14 +3110,18 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "page6type": "SixValues"
-            },
-            {
-                "page6type": "WindRoseFlex"
-            }
-        ]
+        "condition": {
+            "page6type": [
+                "SixValues"
+            ],
+            "visiblePages": [
+                "6",
+                "7",
+                "8",
+                "9",
+                "10"
+            ]
+        }
     },
     {
         "name": "page6value6",
@@ -2922,14 +3133,18 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "page6type": "SixValues"
-            },
-            {
-                "page6type": "WindRoseFlex"
-            }
-        ]
+        "condition": {
+            "page6type": [
+                "SixValues"
+            ],
+            "visiblePages": [
+                "6",
+                "7",
+                "8",
+                "9",
+                "10"
+            ]
+        }
     },
     {
         "name": "page6fluid",
@@ -2971,11 +3186,41 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "page6type": "Fluid"
-            }
-        ]
+        "condition": {
+            "page6type": "Fluid",
+            "visiblePages": [
+                "6",
+                "7",
+                "8",
+                "9",
+                "10"
+            ]
+        }
+    },
+    {
+        "name": "page6wndsrc",
+        "label": "Wind source",
+        "type": "list",
+        "default": "True wind",
+        "description": "Wind source for page 6: [true|apparent]",
+        "list": [
+            "True wind",
+            "apparent wind"
+        ],
+        "category": "OBP40 Page 6",
+        "capabilities": {
+            "obp40": "true"
+        },
+        "condition": {
+            "page6type": "WindPlot",
+            "visiblePages": [
+                "6",
+                "7",
+                "8",
+                "9",
+                "10"
+            ]
+        }
     },
     {
         "name": "page7type",
@@ -2989,16 +3234,19 @@
             "Battery2",
             "Clock",
             "Compass",
+            "DigitalOut",
             "DST810",
             "Fluid",
             "FourValues",
             "FourValues2",
             "Generator",
             "KeelPosition",
+            "Navigation",
             "OneValue",
             "RollPitch",
             "RudderPosition",
             "SixValues",
+            "SkyView",
             "Solar",
             "ThreeValues",
             "TwoValues",
@@ -3014,20 +3262,14 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "visiblePages": 7
-            },
-            {
-                "visiblePages": 8
-            },
-            {
-                "visiblePages": 9
-            },
-            {
-                "visiblePages": 10
-            }
-        ]
+        "condition": {
+            "visiblePages": [
+                "7",
+                "8",
+                "9",
+                "10"
+            ]
+        }
     },
     {
         "name": "page7value1",
@@ -3039,35 +3281,25 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "page7type": "Fluid"
-            },
-            {
-                "page7type": "FourValues"
-            },
-            {
-                "page7type": "FourValues2"
-            },
-            {
-                "page7type": "OneValue"
-            },
-            {
-                "page7type": "RollPitch"
-            },
-            {
-                "page7type": "SixValues"
-            },
-            {
-                "page7type": "ThreeValues"
-            },
-            {
-                "page7type": "TwoValues"
-            },
-            {
-                "page7type": "WindRoseFlex"
-            }
-        ]
+        "condition": {
+            "page7type": [
+                "Fluid",
+                "FourValues",
+                "FourValues2",
+                "OneValue",
+                "RollPitch",
+                "SixValues",
+                "ThreeValues",
+                "TwoValues",
+                "WindRoseFlex"
+            ],
+            "visiblePages": [
+                "7",
+                "8",
+                "9",
+                "10"
+            ]
+        }
     },
     {
         "name": "page7value2",
@@ -3079,29 +3311,23 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "page7type": "FourValues"
-            },
-            {
-                "page7type": "FourValues2"
-            },
-            {
-                "page7type": "RollPitch"
-            },
-            {
-                "page7type": "SixValues"
-            },
-            {
-                "page7type": "ThreeValues"
-            },
-            {
-                "page7type": "TwoValues"
-            },
-            {
-                "page7type": "WindRoseFlex"
-            }
-        ]
+        "condition": {
+            "page7type": [
+                "FourValues",
+                "FourValues2",
+                "RollPitch",
+                "SixValues",
+                "ThreeValues",
+                "TwoValues",
+                "WindRoseFlex"
+            ],
+            "visiblePages": [
+                "7",
+                "8",
+                "9",
+                "10"
+            ]
+        }
     },
     {
         "name": "page7value3",
@@ -3113,23 +3339,21 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "page7type": "FourValues"
-            },
-            {
-                "page7type": "FourValues2"
-            },
-            {
-                "page7type": "SixValues"
-            },
-            {
-                "page7type": "ThreeValues"
-            },
-            {
-                "page7type": "WindRoseFlex"
-            }
-        ]
+        "condition": {
+            "page7type": [
+                "FourValues",
+                "FourValues2",
+                "SixValues",
+                "ThreeValues",
+                "WindRoseFlex"
+            ],
+            "visiblePages": [
+                "7",
+                "8",
+                "9",
+                "10"
+            ]
+        }
     },
     {
         "name": "page7value4",
@@ -3141,20 +3365,20 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "page7type": "FourValues"
-            },
-            {
-                "page7type": "FourValues2"
-            },
-            {
-                "page7type": "SixValues"
-            },
-            {
-                "page7type": "WindRoseFlex"
-            }
-        ]
+        "condition": {
+            "page7type": [
+                "FourValues",
+                "FourValues2",
+                "SixValues",
+                "WindRoseFlex"
+            ],
+            "visiblePages": [
+                "7",
+                "8",
+                "9",
+                "10"
+            ]
+        }
     },
     {
         "name": "page7value5",
@@ -3166,14 +3390,17 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "page7type": "SixValues"
-            },
-            {
-                "page7type": "WindRoseFlex"
-            }
-        ]
+        "condition": {
+            "page7type": [
+                "SixValues"
+            ],
+            "visiblePages": [
+                "7",
+                "8",
+                "9",
+                "10"
+            ]
+        }
     },
     {
         "name": "page7value6",
@@ -3185,14 +3412,17 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "page7type": "SixValues"
-            },
-            {
-                "page7type": "WindRoseFlex"
-            }
-        ]
+        "condition": {
+            "page7type": [
+                "SixValues"
+            ],
+            "visiblePages": [
+                "7",
+                "8",
+                "9",
+                "10"
+            ]
+        }
     },
     {
         "name": "page7fluid",
@@ -3234,17 +3464,45 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "page7type": "Fluid"
-            }
-        ]
+        "condition": {
+            "page7type": "Fluid",
+            "visiblePages": [
+                "7",
+                "8",
+                "9",
+                "10"
+            ]
+        }
+    },
+    {
+        "name": "page7wndsrc",
+        "label": "Wind source",
+        "type": "list",
+        "default": "True wind",
+        "description": "Wind source for page 7: [true|apparent]",
+        "list": [
+            "True wind",
+            "apparent wind"
+        ],
+        "category": "OBP40 Page 7",
+        "capabilities": {
+            "obp40": "true"
+        },
+        "condition": {
+            "page7type": "WindPlot",
+            "visiblePages": [
+                "7",
+                "8",
+                "9",
+                "10"
+            ]
+        }
     },
     {
         "name": "page8type",
         "label": "Type",
         "type": "list",
-        "default": "Fluid",
+        "default": "Clock",
         "description": "Type of page for page 8",
         "list": [
             "BME280",
@@ -3252,16 +3510,19 @@
             "Battery2",
             "Clock",
             "Compass",
+            "DigitalOut",
             "DST810",
             "Fluid",
             "FourValues",
             "FourValues2",
             "Generator",
             "KeelPosition",
+            "Navigation",
             "OneValue",
             "RollPitch",
             "RudderPosition",
             "SixValues",
+            "SkyView",
             "Solar",
             "ThreeValues",
             "TwoValues",
@@ -3277,17 +3538,13 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "visiblePages": 8
-            },
-            {
-                "visiblePages": 9
-            },
-            {
-                "visiblePages": 10
-            }
-        ]
+        "condition": {
+            "visiblePages": [
+                "8",
+                "9",
+                "10"
+            ]
+        }
     },
     {
         "name": "page8value1",
@@ -3299,35 +3556,24 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "page8type": "Fluid"
-            },
-            {
-                "page8type": "FourValues"
-            },
-            {
-                "page8type": "FourValues2"
-            },
-            {
-                "page8type": "OneValue"
-            },
-            {
-                "page8type": "RollPitch"
-            },
-            {
-                "page8type": "SixValues"
-            },
-            {
-                "page8type": "ThreeValues"
-            },
-            {
-                "page8type": "TwoValues"
-            },
-            {
-                "page8type": "WindRoseFlex"
-            }
-        ]
+        "condition": {
+            "page8type": [
+                "Fluid",
+                "FourValues",
+                "FourValues2",
+                "OneValue",
+                "RollPitch",
+                "SixValues",
+                "ThreeValues",
+                "TwoValues",
+                "WindRoseFlex"
+            ],
+            "visiblePages": [
+                "8",
+                "9",
+                "10"
+            ]
+        }
     },
     {
         "name": "page8value2",
@@ -3339,29 +3585,22 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "page8type": "FourValues"
-            },
-            {
-                "page8type": "FourValues2"
-            },
-            {
-                "page8type": "RollPitch"
-            },
-            {
-                "page8type": "SixValues"
-            },
-            {
-                "page8type": "ThreeValues"
-            },
-            {
-                "page8type": "TwoValues"
-            },
-            {
-                "page8type": "WindRoseFlex"
-            }
-        ]
+        "condition": {
+            "page8type": [
+                "FourValues",
+                "FourValues2",
+                "RollPitch",
+                "SixValues",
+                "ThreeValues",
+                "TwoValues",
+                "WindRoseFlex"
+            ],
+            "visiblePages": [
+                "8",
+                "9",
+                "10"
+            ]
+        }
     },
     {
         "name": "page8value3",
@@ -3373,23 +3612,20 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "page8type": "FourValues"
-            },
-            {
-                "page8type": "FourValues2"
-            },
-            {
-                "page8type": "SixValues"
-            },
-            {
-                "page8type": "ThreeValues"
-            },
-            {
-                "page8type": "WindRoseFlex"
-            }
-        ]
+        "condition": {
+            "page8type": [
+                "FourValues",
+                "FourValues2",
+                "SixValues",
+                "ThreeValues",
+                "WindRoseFlex"
+            ],
+            "visiblePages": [
+                "8",
+                "9",
+                "10"
+            ]
+        }
     },
     {
         "name": "page8value4",
@@ -3401,20 +3637,19 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "page8type": "FourValues"
-            },
-            {
-                "page8type": "FourValues2"
-            },
-            {
-                "page8type": "SixValues"
-            },
-            {
-                "page8type": "WindRoseFlex"
-            }
-        ]
+        "condition": {
+            "page8type": [
+                "FourValues",
+                "FourValues2",
+                "SixValues",
+                "WindRoseFlex"
+            ],
+            "visiblePages": [
+                "8",
+                "9",
+                "10"
+            ]
+        }
     },
     {
         "name": "page8value5",
@@ -3426,14 +3661,16 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "page8type": "SixValues"
-            },
-            {
-                "page8type": "WindRoseFlex"
-            }
-        ]
+        "condition": {
+            "page8type": [
+                "SixValues"
+            ],
+            "visiblePages": [
+                "8",
+                "9",
+                "10"
+            ]
+        }
     },
     {
         "name": "page8value6",
@@ -3445,14 +3682,16 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "page8type": "SixValues"
-            },
-            {
-                "page8type": "WindRoseFlex"
-            }
-        ]
+        "condition": {
+            "page8type": [
+                "SixValues"
+            ],
+            "visiblePages": [
+                "8",
+                "9",
+                "10"
+            ]
+        }
     },
     {
         "name": "page8fluid",
@@ -3494,11 +3733,37 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "page8type": "Fluid"
-            }
-        ]
+        "condition": {
+            "page8type": "Fluid",
+            "visiblePages": [
+                "8",
+                "9",
+                "10"
+            ]
+        }
+    },
+    {
+        "name": "page8wndsrc",
+        "label": "Wind source",
+        "type": "list",
+        "default": "True wind",
+        "description": "Wind source for page 8: [true|apparent]",
+        "list": [
+            "True wind",
+            "apparent wind"
+        ],
+        "category": "OBP40 Page 8",
+        "capabilities": {
+            "obp40": "true"
+        },
+        "condition": {
+            "page8type": "WindPlot",
+            "visiblePages": [
+                "8",
+                "9",
+                "10"
+            ]
+        }
     },
     {
         "name": "page9type",
@@ -3512,16 +3777,19 @@
             "Battery2",
             "Clock",
             "Compass",
+            "DigitalOut",
             "DST810",
             "Fluid",
             "FourValues",
             "FourValues2",
             "Generator",
             "KeelPosition",
+            "Navigation",
             "OneValue",
             "RollPitch",
             "RudderPosition",
             "SixValues",
+            "SkyView",
             "Solar",
             "ThreeValues",
             "TwoValues",
@@ -3537,14 +3805,12 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "visiblePages": 9
-            },
-            {
-                "visiblePages": 10
-            }
-        ]
+        "condition": {
+            "visiblePages": [
+                "9",
+                "10"
+            ]
+        }
     },
     {
         "name": "page9value1",
@@ -3556,35 +3822,23 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "page9type": "Fluid"
-            },
-            {
-                "page9type": "FourValues"
-            },
-            {
-                "page9type": "FourValues2"
-            },
-            {
-                "page9type": "OneValue"
-            },
-            {
-                "page9type": "RollPitch"
-            },
-            {
-                "page9type": "SixValues"
-            },
-            {
-                "page9type": "ThreeValues"
-            },
-            {
-                "page9type": "TwoValues"
-            },
-            {
-                "page9type": "WindRoseFlex"
-            }
-        ]
+        "condition": {
+            "page9type": [
+                "Fluid",
+                "FourValues",
+                "FourValues2",
+                "OneValue",
+                "RollPitch",
+                "SixValues",
+                "ThreeValues",
+                "TwoValues",
+                "WindRoseFlex"
+            ],
+            "visiblePages": [
+                "9",
+                "10"
+            ]
+        }
     },
     {
         "name": "page9value2",
@@ -3596,29 +3850,21 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "page9type": "FourValues"
-            },
-            {
-                "page9type": "FourValues2"
-            },
-            {
-                "page9type": "RollPitch"
-            },
-            {
-                "page9type": "SixValues"
-            },
-            {
-                "page9type": "ThreeValues"
-            },
-            {
-                "page9type": "TwoValues"
-            },
-            {
-                "page9type": "WindRoseFlex"
-            }
-        ]
+        "condition": {
+            "page9type": [
+                "FourValues",
+                "FourValues2",
+                "RollPitch",
+                "SixValues",
+                "ThreeValues",
+                "TwoValues",
+                "WindRoseFlex"
+            ],
+            "visiblePages": [
+                "9",
+                "10"
+            ]
+        }
     },
     {
         "name": "page9value3",
@@ -3630,23 +3876,19 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "page9type": "FourValues"
-            },
-            {
-                "page9type": "FourValues2"
-            },
-            {
-                "page9type": "SixValues"
-            },
-            {
-                "page9type": "ThreeValues"
-            },
-            {
-                "page9type": "WindRoseFlex"
-            }
-        ]
+        "condition": {
+            "page9type": [
+                "FourValues",
+                "FourValues2",
+                "SixValues",
+                "ThreeValues",
+                "WindRoseFlex"
+            ],
+            "visiblePages": [
+                "9",
+                "10"
+            ]
+        }
     },
     {
         "name": "page9value4",
@@ -3658,20 +3900,18 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "page9type": "FourValues"
-            },
-            {
-                "page9type": "FourValues2"
-            },
-            {
-                "page9type": "SixValues"
-            },
-            {
-                "page9type": "WindRoseFlex"
-            }
-        ]
+        "condition": {
+            "page9type": [
+                "FourValues",
+                "FourValues2",
+                "SixValues",
+                "WindRoseFlex"
+            ],
+            "visiblePages": [
+                "9",
+                "10"
+            ]
+        }
     },
     {
         "name": "page9value5",
@@ -3683,14 +3923,15 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "page9type": "SixValues"
-            },
-            {
-                "page9type": "WindRoseFlex"
-            }
-        ]
+        "condition": {
+            "page9type": [
+                "SixValues"
+            ],
+            "visiblePages": [
+                "9",
+                "10"
+            ]
+        }
     },
     {
         "name": "page9value6",
@@ -3702,14 +3943,15 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "page9type": "SixValues"
-            },
-            {
-                "page9type": "WindRoseFlex"
-            }
-        ]
+        "condition": {
+            "page9type": [
+                "SixValues"
+            ],
+            "visiblePages": [
+                "9",
+                "10"
+            ]
+        }
     },
     {
         "name": "page9fluid",
@@ -3751,11 +3993,35 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "page9type": "Fluid"
-            }
-        ]
+        "condition": {
+            "page9type": "Fluid",
+            "visiblePages": [
+                "9",
+                "10"
+            ]
+        }
+    },
+    {
+        "name": "page9wndsrc",
+        "label": "Wind source",
+        "type": "list",
+        "default": "True wind",
+        "description": "Wind source for page 9: [true|apparent]",
+        "list": [
+            "True wind",
+            "apparent wind"
+        ],
+        "category": "OBP40 Page 9",
+        "capabilities": {
+            "obp40": "true"
+        },
+        "condition": {
+            "page9type": "WindPlot",
+            "visiblePages": [
+                "9",
+                "10"
+            ]
+        }
     },
     {
         "name": "page10type",
@@ -3769,16 +4035,19 @@
             "Battery2",
             "Clock",
             "Compass",
+            "DigitalOut",
             "DST810",
             "Fluid",
             "FourValues",
             "FourValues2",
             "Generator",
             "KeelPosition",
+            "Navigation",
             "OneValue",
             "RollPitch",
             "RudderPosition",
             "SixValues",
+            "SkyView",
             "Solar",
             "ThreeValues",
             "TwoValues",
@@ -3794,11 +4063,11 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "visiblePages": 10
-            }
-        ]
+        "condition": {
+            "visiblePages": [
+                "10"
+            ]
+        }
     },
     {
         "name": "page10value1",
@@ -3810,35 +4079,22 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "page10type": "Fluid"
-            },
-            {
-                "page10type": "FourValues"
-            },
-            {
-                "page10type": "FourValues2"
-            },
-            {
-                "page10type": "OneValue"
-            },
-            {
-                "page10type": "RollPitch"
-            },
-            {
-                "page10type": "SixValues"
-            },
-            {
-                "page10type": "ThreeValues"
-            },
-            {
-                "page10type": "TwoValues"
-            },
-            {
-                "page10type": "WindRoseFlex"
-            }
-        ]
+        "condition": {
+            "page10type": [
+                "Fluid",
+                "FourValues",
+                "FourValues2",
+                "OneValue",
+                "RollPitch",
+                "SixValues",
+                "ThreeValues",
+                "TwoValues",
+                "WindRoseFlex"
+            ],
+            "visiblePages": [
+                "10"
+            ]
+        }
     },
     {
         "name": "page10value2",
@@ -3850,29 +4106,20 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "page10type": "FourValues"
-            },
-            {
-                "page10type": "FourValues2"
-            },
-            {
-                "page10type": "RollPitch"
-            },
-            {
-                "page10type": "SixValues"
-            },
-            {
-                "page10type": "ThreeValues"
-            },
-            {
-                "page10type": "TwoValues"
-            },
-            {
-                "page10type": "WindRoseFlex"
-            }
-        ]
+        "condition": {
+            "page10type": [
+                "FourValues",
+                "FourValues2",
+                "RollPitch",
+                "SixValues",
+                "ThreeValues",
+                "TwoValues",
+                "WindRoseFlex"
+            ],
+            "visiblePages": [
+                "10"
+            ]
+        }
     },
     {
         "name": "page10value3",
@@ -3884,23 +4131,18 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "page10type": "FourValues"
-            },
-            {
-                "page10type": "FourValues2"
-            },
-            {
-                "page10type": "SixValues"
-            },
-            {
-                "page10type": "ThreeValues"
-            },
-            {
-                "page10type": "WindRoseFlex"
-            }
-        ]
+        "condition": {
+            "page10type": [
+                "FourValues",
+                "FourValues2",
+                "SixValues",
+                "ThreeValues",
+                "WindRoseFlex"
+            ],
+            "visiblePages": [
+                "10"
+            ]
+        }
     },
     {
         "name": "page10value4",
@@ -3912,20 +4154,17 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "page10type": "FourValues"
-            },
-            {
-                "page10type": "FourValues2"
-            },
-            {
-                "page10type": "SixValues"
-            },
-            {
-                "page10type": "WindRoseFlex"
-            }
-        ]
+        "condition": {
+            "page10type": [
+                "FourValues",
+                "FourValues2",
+                "SixValues",
+                "WindRoseFlex"
+            ],
+            "visiblePages": [
+                "10"
+            ]
+        }
     },
     {
         "name": "page10value5",
@@ -3937,14 +4176,14 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "page10type": "SixValues"
-            },
-            {
-                "page10type": "WindRoseFlex"
-            }
-        ]
+        "condition": {
+            "page10type": [
+                "SixValues"
+            ],
+            "visiblePages": [
+                "10"
+            ]
+        }
     },
     {
         "name": "page10value6",
@@ -3956,14 +4195,14 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "page10type": "SixValues"
-            },
-            {
-                "page10type": "WindRoseFlex"
-            }
-        ]
+        "condition": {
+            "page10type": [
+                "SixValues"
+            ],
+            "visiblePages": [
+                "10"
+            ]
+        }
     },
     {
         "name": "page10fluid",
@@ -4005,11 +4244,32 @@
         "capabilities": {
             "obp40": "true"
         },
-        "condition": [
-            {
-                "page10type": "Fluid"
-            }
-        ]
+        "condition": {
+            "page10type": "Fluid",
+            "visiblePages": [
+                "10"
+            ]
+        }
+    },
+    {
+        "name": "page10wndsrc",
+        "label": "Wind source",
+        "type": "list",
+        "default": "True wind",
+        "description": "Wind source for page 10: [true|apparent]",
+        "list": [
+            "True wind",
+            "apparent wind"
+        ],
+        "category": "OBP40 Page 10",
+        "capabilities": {
+            "obp40": "true"
+        },
+        "condition": {
+            "page10type": "WindPlot",
+            "visiblePages": [
+                "10"
+            ]
+        }
     }
 ]
-

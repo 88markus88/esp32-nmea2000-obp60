@@ -1,36 +1,90 @@
+// Function lib for history buffer handling, true wind calculation, and other operations on boat data
 #pragma once
-#include "GwApi.h"
 #include "OBPRingBuffer.h"
-#include <Arduino.h>
-#include <math.h>
+#include "obp60task.h"
 
 typedef struct {
-    RingBuffer<int16_t>* twdHstry;
-    RingBuffer<int16_t>* twsHstry;
+    RingBuffer<uint16_t>* twdHstry;
+    RingBuffer<uint16_t>* twsHstry;
+    RingBuffer<uint16_t>* awdHstry;
+    RingBuffer<uint16_t>* awsHstry;
 } tBoatHstryData; // Holds pointers to all history buffers for boat data
 
 class HstryBuf {
+private:
+    GwLog *logger;
+
+    RingBuffer<uint16_t> twdHstry; // Circular buffer to store true wind direction values
+    RingBuffer<uint16_t> twsHstry; // Circular buffer to store true wind speed values (TWS)
+    RingBuffer<uint16_t> awdHstry; // Circular buffer to store apparent wind direction values
+    RingBuffer<uint16_t> awsHstry; // Circular buffer to store apparent xwind speed values (AWS)
+    double twdHstryMin; // Min value for wind direction (TWD) in history buffer
+    double twdHstryMax; // Max value for wind direction (TWD) in history buffer
+    double twsHstryMin;
+    double twsHstryMax;
+    double awdHstryMin;
+    double awdHstryMax;
+    double awsHstryMin;
+    double awsHstryMax;
+
+    // boat values for buffers and for true wind calculation
+    GwApi::BoatValue *twdBVal, *twsBVal, *twaBVal, *awdBVal, *awsBVal;
+    GwApi::BoatValue *awaBVal, *hdtBVal, *hdmBVal, *varBVal, *cogBVal, *sogBVal;
 
 public:
-    void fillWndBufSimData(tBoatHstryData& hstryBufs); // Fill most part of the TWD and TWS history buffer with simulated data
+    tBoatHstryData hstryBufList;
+
+    HstryBuf(){
+        hstryBufList = {&twdHstry, &twsHstry, &awdHstry, &awsHstry}; // Generate history buffers of zero size
+    };
+    
+    HstryBuf(int size) {
+        hstryBufList = {&twdHstry, &twsHstry, &awdHstry, &awsHstry}; 
+        hstryBufList.twdHstry->resize(size); // store <size> xWD values for <size>/60 minutes history
+        hstryBufList.twsHstry->resize(size);
+        hstryBufList.awdHstry->resize(size);
+        hstryBufList.awsHstry->resize(size);
+    };
+    void init(BoatValueList* boatValues, GwLog *log);
+    void handleHstryBuf(bool useSimuData);
 };
 
 class WindUtils {
+private:
+    GwApi::BoatValue *twdBVal, *twsBVal, *twaBVal;
+    GwApi::BoatValue *awaBVal, *awsBVal, *cogBVal, *stwBVal, *sogBVal, *hdtBVal, *hdmBVal, *varBVal;
+    static constexpr double DBL_MAX = std::numeric_limits<double>::max();
 
 public:
+    WindUtils(BoatValueList* boatValues){
+        twdBVal = boatValues->findValueOrCreate("TWD");
+        twsBVal = boatValues->findValueOrCreate("TWS");
+        twaBVal = boatValues->findValueOrCreate("TWA");
+        awaBVal = boatValues->findValueOrCreate("AWA");
+        awsBVal = boatValues->findValueOrCreate("AWS");
+        cogBVal = boatValues->findValueOrCreate("COG");
+        stwBVal = boatValues->findValueOrCreate("STW");
+        sogBVal = boatValues->findValueOrCreate("SOG");
+        hdtBVal = boatValues->findValueOrCreate("HDT");
+        hdmBVal = boatValues->findValueOrCreate("HDM");
+        varBVal = boatValues->findValueOrCreate("VAR");
+    };
+
     static double to2PI(double a);
     static double toPI(double a);
     static double to360(double a);
     static double to180(double a);
-    static void toCart(const double* phi, const double* r, double* x, double* y);
-    static void toPol(const double* x, const double* y, double* phi, double* r);
-    static void addPolar(const double* phi1, const double* r1,
+    void toCart(const double* phi, const double* r, double* x, double* y);
+    void toPol(const double* x, const double* y, double* phi, double* r);
+    void addPolar(const double* phi1, const double* r1,
         const double* phi2, const double* r2,
         double* phi, double* r);
-    static void calcTwdSA(const double* AWA, const double* AWS,
+    void calcTwdSA(const double* AWA, const double* AWS,
         const double* CTW, const double* STW, const double* HDT,
         double* TWD, double* TWS, double* TWA);
-    static bool calcTrueWind(const double* awaVal, const double* awsVal,
+    static double calcHDT(const double* hdmVal, const double* varVal, const double* cogVal, const double* sogVal);
+    bool calcTrueWind(const double* awaVal, const double* awsVal,
         const double* cogVal, const double* stwVal, const double* sogVal, const double* hdtVal,
         const double* hdmVal, const double* varVal, double* twdVal, double* twsVal, double* twaVal);
+    bool addTrueWind(GwApi* api, BoatValueList* boatValues, GwLog *log);
 };
